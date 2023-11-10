@@ -4,6 +4,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Version = "V1",
+        Title = "Hackathon API",
+        Description = "API for Hackathon App"
+    });
+
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -13,6 +24,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
