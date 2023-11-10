@@ -1,0 +1,38 @@
+<div class="grid grid-cols-12 grid-rows-[210px_minmax(900px,_1fr)_100px] h-full w-full overflow-y-hidden bg-supplier-scan-bg bg-no-repeat overflow-x-hidden">
+  <div class="w-full h-[70px] col-span-12 bg-white flex justify-between items-center px-[42px] border-2 border-b-[£F3F3F3]">
+    <nb-user size="large"
+             name="Azam Fhamy"
+             title="Supplier"
+             [picture]="base64image">
+    </nb-user>
+    <button class="w-[86px]" nbButton hero status="primary">Logout</button>
+  </div>
+  <div class="col-span-3 z-10 flex items-center">
+    <img src="../../assets/images/doc1.png" alt="Doctor 1" />
+  </div>
+  <div class="col-span-6 ">
+    <div class="px-[98px] mb-[14px]">
+      <label for="input-group-1" class="text-[#4B5563] block text-[20px] text-left mb-[12px]">Enter Your Digit :</label>
+      <div class="relative flex gap-x-[23px]">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+        </div>
+        <input type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full p-4 focus:border-[#7FD3FA] text-[£6F7174] text-[16px]" placeholder="Ex: XXX_XXXX_XXXX">
+        <button nbButton hero status="success">submit</button>
+        <button nbButton hero status="danger">Clear</button>
+      </div>
+    </div>
+    <div class="px-[170px] flex flex-col items-center justify-center gap-5">
+      <div class="inline-flex items-center justify-center w-full">
+        <hr class="w-11/12 h-px my-8 bg-[#B5B5B5] border-0 rounded ">
+        <div class="absolute px-4 -translate-x-1/2 bg-white left-1/2 ">
+          <p class="text-[20px] font-medium">Or Scan the QR</p>
+        </div>
+      </div>
+      <button class="w-full mb-10" nbButton hero status="info">Scan QR</button>
+      <img src="../../assets/images/sample-QR.png" alt="Sample QR" />
+    </div>
+  </div>
+  <div class="col-span-3"></div>
+  <div class="z-0 w-full h-[70px] col-span-12 bg-white flex justify-between items-center px-[42px] border-2 border-b-[£F3F3F3] fixed bottom-0">
+  </div>
+</div>
