@@ -3,6 +3,7 @@ using Inivohacks.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,7 +31,11 @@ namespace Inivohacks.BL.Helper
 
             var item = new Manufacturer()
             {
-                
+                Name = manufacturer.Name,
+                Address = manufacturer.Address,
+                NotifyEmail = manufacturer.NotifyEmail,
+                NotifySMS = manufacturer.NotifySMS
+
             };
 
             return item;

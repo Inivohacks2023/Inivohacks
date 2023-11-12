@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
+using Inivohacks.BL.DTOs;
+using Inivohacks.ViewModels;
 
 namespace Inivohacks.Mapper
 {
     public class ApplicationMapper :  Profile
     {
         public ApplicationMapper() 
-        { 
+        {
+            CreateMap<ManufacturerRequestModel, ManufacturerDto>();
         }
     }
 

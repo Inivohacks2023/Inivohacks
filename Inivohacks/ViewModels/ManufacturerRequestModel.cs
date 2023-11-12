@@ -7,6 +7,6 @@
         public string Name { get; set; }
         public string Address { get; set; }
         public string NotifyEmail { get; set; }
-        public int NotifySMS { get; set; }
+        public string NotifySMS { get; set; }
     }
 }
