@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Inivohacks.BL.DTOs;
+using Inivohacks.DAL.Models;
 using Inivohacks.ViewModels;
 
 namespace Inivohacks.Mapper
@@ -9,7 +10,10 @@ namespace Inivohacks.Mapper
         public ApplicationMapper() 
         {
             CreateMap<ManufacturerRequestModel, ManufacturerDto>();
+
+            #region Batch
             CreateMap<BatchRequestModel, BatchDTO>();
+            #endregion
         }
     }
 

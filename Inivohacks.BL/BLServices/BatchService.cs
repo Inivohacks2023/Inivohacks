@@ -29,12 +29,13 @@ namespace Inivohacks.BL.BLServices
             try
             {
                 Batch obj = new Batch() {
-                ProductId=batch.ProductId,
+                    ProductId=batch.ProductId,
                     ManufacturedDate=batch.ManufacturedDate,
                     ExpiryDate=batch.ExpiryDate,
                     OriginalBatchid=batch.OriginalBatchid,
                     Qty=batch.Qty
                 };
+               
                 _iBatchRepository.AddAsync(obj);
                 status = true;
             }
