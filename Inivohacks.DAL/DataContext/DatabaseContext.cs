@@ -21,6 +21,8 @@ namespace Inivohacks.DAL.DataContext
         public DbSet<TrackingCode> TrackingCodes { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<CertPermission> CertPermissions { get; set; }
+        public DbSet<Batch> Batch { get; set; }
+        public DbSet<BatchItem> BatchItem { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
