@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Inivohacks.BL.BLServices
 {
-    public class UserService
+    public class UserService 
     {
     }
 }

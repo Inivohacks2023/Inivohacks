@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Inivohacks.DAL.Models
 {
     public class Product
     {
-        public Product() {
+     
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ProductID { get; set; }
+        public int ManufactureID { get; set; }
+        public string Name { get; set; }
+        public string Dosage { get; set; }
+        public string  PType { get; set; }
 
-            Manufacturer = new HashSet<Manufacturer>();
-        }
-       public int ProductID { get; set; }
-       public int ManufactureID { get; set; }
-       public string Name { get; set; }
-       public string Dosage { get; set; }
-       public string  PType { get; set; }
-
-        public ICollection<Manufacturer> Manufacturer { get; set; }
+        public virtual Manufacturer Manufacturer { get; set; }
+        public ICollection<Certificate> Certificates { get; set; }
+       
     }
 }

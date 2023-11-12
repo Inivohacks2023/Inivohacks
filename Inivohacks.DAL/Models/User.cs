@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Inivohacks.DAL.Models
 {
     public class User
 
     {
-        public User()
-        {
-            Manufacturers = new HashSet<Manufacturer>();
-        }
+       
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public int ManufacturerID { get; set; }
         public bool LoginDisabled { get; set; }
 
-        public ICollection<Manufacturer> Manufacturers { get; set; }
+        public virtual Manufacturer Manufacturer { get; set; }
+        public ICollection<Scan> Scans { get; set; }
+        
     }
 }

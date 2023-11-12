@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Inivohacks.DAL.Models
 {
     public class Certificate
     {
-        public Certificate() 
-        {
-            Product = new HashSet<Product>();
-        }
+       
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CertificationID { get; set; }
         public int ProductID { get; set; }
         public bool InUse { get; set; }
         public DateTime ExpiryDate { get; set; }
-
-        ICollection<Product> Product { get; set;}
+       
+        public virtual Product Product { get; set;}
+        public ICollection<CertPermission> CertPermissions { get; set; }
+        public ICollection<Scan> Scans { get; set; }
+       
     }
 }
