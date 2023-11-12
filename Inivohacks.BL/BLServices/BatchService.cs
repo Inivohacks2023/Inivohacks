@@ -45,5 +45,11 @@ namespace Inivohacks.BL.BLServices
             }
             return status;
         }
+
+        public Task<List<Batch>> GetAllBatchesAsync(int? productId)
+        {
+            var x = _iBatchRepository.Search(o=>);
+            throw new NotImplementedException();
+        }
     }
 }
