@@ -1,4 +1,7 @@
 ﻿using Inivohacks.BL.BLServices;
+using Inivohacks.BL.DTOs;
+using Inivohacks.Mapper;
+using Inivohacks.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inivohacks.Controllers
@@ -14,16 +17,16 @@ namespace Inivohacks.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveCodesAsync()
+        public async Task<IActionResult> SaveCodesAsync(AddCodeRequestModel addCodeRequest)
         {
-            _codeService.SaveCustomCodeAsync();
+            _codeService.SaveCustomCodeAsync(MapperExtentions.ToDto<AddCodeRequestModel,CodeDto>(addCodeRequest));
             return Ok();
         }
 
         [HttpGet]
-        public async Task<IActionResult> GenerateCodesAsync()
+        public async Task<IActionResult> GenerateCodesAsync(int NoProducts,int ProductId)
         {
-            _codeService.GenerateCodeAsync();
+            _codeService.GenerateCodeAsync(NoProducts,ProductId);
             return Ok();
         }
     }

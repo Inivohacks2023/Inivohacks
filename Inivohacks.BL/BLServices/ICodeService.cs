@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Inivohacks.BL.DTOs;
 
 namespace Inivohacks.BL.BLServices
 {
-    internal class ICodeService
+    public interface ICodeService
     {
+        CodeResponseDto GenerateCodeAsync(int NoProducts,int ProductId);
+        void SaveCustomCodeAsync(CodeDto codeDto);
     }
 }
