@@ -1,11 +1,8 @@
 ﻿using Inivohacks.BL.DTOs;
+using Inivohacks.DAL.Migrations;
 using Inivohacks.DAL.Models;
 using Inivohacks.DAL.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Inivohacks.BL.BLServices
 {
@@ -46,10 +43,70 @@ namespace Inivohacks.BL.BLServices
             return status;
         }
 
-        public Task<List<Batch>> GetAllBatchesAsync(int? productId)
+        public async Task<List<Batch>> GetAllBatchesAsync(int? productId)
         {
-            var x = _iBatchRepository.Search(o=>);
-            throw new NotImplementedException();
+            return( await _iBatchRepository.Search(o => (productId == null || o.ProductId==productId) &&!o.IsDelete).ToListAsync());
+        }
+
+        public async  Task<BatchInformationDTO?> GetBatchById(int batchId)
+        {
+            var obj=await _iBatchRepository.Search(o => o.Id ==batchId).FirstOrDefaultAsync();
+            if (obj == null) return null;
+
+            var returnObj = new BatchInformationDTO()
+            {
+                Id=obj.Id,
+                ProductId=obj.ProductId,
+                ManufacturedDate=obj.ManufacturedDate,
+                ExpiryDate=obj.ExpiryDate,
+                Qty = obj.Qty ,
+                LocationId=obj.LocationId ,
+                LocationName=obj.LocationName,
+                Status=obj.Status,
+            };
+            bool originalBatchReached = false;
+            int? orignalBatchID = obj.OriginalBatchid;
+            do
+            {
+                var lastBatchObjectBeforRebrand= await _iBatchRepository.Search(o => o.Id == orignalBatchID).FirstOrDefaultAsync();
+                if (lastBatchObjectBeforRebrand == null)
+                {
+                    orignalBatchID = 0;
+                }
+                else {
+                  //  var product =  await _iBatchRepository.Search(o => o.Id == batchId).FirstOrDefaultAsync(); //get product etails
+                    returnObj.RebrandHistory.Add(new RebrandHistoryRecord() {ManufacturedDate= lastBatchObjectBeforRebrand.ManufacturedDate,BatchName="" });
+                    orignalBatchID= lastBatchObjectBeforRebrand.OriginalBatchid ; 
+                }
+               
+
+            } while (orignalBatchID != null && orignalBatchID != 0);
+            return returnObj;
+        }
+
+    public async Task<bool> Recall(int batchId)
+        {
+            var obj = await _iBatchRepository.Search(o => o.Id == batchId).SingleOrDefaultAsync();
+           
+            if (obj == null)
+            {
+                return false;
+            }
+            obj.Status = "Recalled";
+            await _iBatchRepository.UpdateAsync(obj);
+            return true;
+        }
+
+        public async Task<bool> Delete(int batchId)
+        {
+            var obj = await _iBatchRepository.Search(o => o.Id == batchId).SingleOrDefaultAsync();
+            if (obj == null)
+            {
+                return false;
+            }
+            obj.IsDelete =true;
+            await _iBatchRepository.UpdateAsync(obj);
+            return true;
         }
     }
 }

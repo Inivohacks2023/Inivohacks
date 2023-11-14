@@ -7,6 +7,10 @@ namespace Inivohacks.BL.BLServices
     {
         public Task<bool> CreateBatchAsync(BatchDTO batch);
         public Task<List<Batch>> GetAllBatchesAsync (int ? productId);
+
+        public Task<BatchInformationDTO> GetBatchById(int batchId);
+        public Task<bool> Recall(int batchId);
+        public Task<bool> Delete(int batchId);
     }
 
 }

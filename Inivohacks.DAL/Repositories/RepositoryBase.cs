@@ -37,5 +37,7 @@ namespace Inivohacks.DAL.Repositories
             return _dbContext.Set<TEntity>().Where(predicate);
         }
 
+
+
     }
 }

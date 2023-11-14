@@ -13,5 +13,6 @@ namespace Inivohacks.DAL.Models
         public int Qty { get; set; }
         public int LocationId { get; set; }
         public string LocationName { get; set; }
+        public bool IsDelete { get; set; } = false;
     }
 }
