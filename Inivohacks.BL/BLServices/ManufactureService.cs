@@ -1,5 +1,6 @@
 ﻿using Inivohacks.BL.DTOs;
 using Inivohacks.BL.Helper;
+using Inivohacks.DAL.Models;
 using Inivohacks.DAL.Repositories;
 
 namespace Inivohacks.BL.BLServices
@@ -21,13 +22,25 @@ namespace Inivohacks.BL.BLServices
             }
             try
             {
-                manufacturerRepository.AddAsync(manufactuer.TransformAPItoDAL());
+                manufacturerRepository.AddManufacturerAsync(manufactuer.TransformAPItoDAL());
                 status = true;
             }
             catch {
                 status = false;
             }
             return status;
+        }
+
+        public async IAsyncEnumerable<ManufacturerDto> GetAllManufacturerAsync()
+        {
+           IAsyncEnumerable<Manufacturer> manufacturerList =  manufacturerRepository.GetAllManufacturerAsync();
+
+
+            await foreach (var m in manufacturerList)
+            {
+                yield return m.TransformDALtoAPI();
+            }
+           
         }
     }
 }

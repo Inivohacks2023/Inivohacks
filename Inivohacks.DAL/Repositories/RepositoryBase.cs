@@ -1,4 +1,5 @@
 ﻿using Inivohacks.DAL.DataContext;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Inivohacks.DAL.Repositories
@@ -13,9 +14,17 @@ namespace Inivohacks.DAL.Repositories
 
         public async Task<TEntity> AddAsync(TEntity entity)
         {
-            //AssignDate(entity);
-            await _dbContext.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            //using (var context = _dbContext)
+            //{
+                try
+                {
+                        await _dbContext.AddAsync(entity);
+                         _dbContext.SaveChanges();
+                }
+
+                catch (Exception ex) { }
+            //}
+        
             return entity;
         }
 

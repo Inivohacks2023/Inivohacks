@@ -17,7 +17,7 @@ namespace Inivohacks.Controllers
             _manufacturerService = manufacturerService;
         }
         [HttpPost]
-        public async Task<IActionResult> ManufacturerCreation(ManufacturerRequestModel viewModel)
+        public async Task<IActionResult> ManufacturerCreation(ManufacturerModel viewModel)
         {
             bool status = false;
             if (!ModelState.IsValid)
@@ -26,9 +26,27 @@ namespace Inivohacks.Controllers
             }
 
             status = await _manufacturerService.CreateManufactureAsync(
-                MapperExtentions.ToDto<ManufacturerRequestModel, ManufacturerDto>(viewModel));
+                MapperExtentions.ToDto<ManufacturerModel, ManufacturerDto>(viewModel));
 
             return Ok();
+        }
+        [HttpGet]
+        public async Task<ActionResult<ManufacturerModel>> ManufacturerList()
+        {
+            List<ManufacturerModel> manufacturerModelsList = new List<ManufacturerModel>();
+
+            IAsyncEnumerable<ManufacturerDto> manufacturerList =  _manufacturerService.GetAllManufacturerAsync();
+            if (manufacturerList == null)
+            {
+                return NotFound();
+            }
+            await foreach (var m in manufacturerList)
+            {
+                manufacturerModelsList.Add(MapperExtentions.ToViewModel<ManufacturerDto, ManufacturerModel>(m));
+            }
+
+            return Ok(manufacturerModelsList);
+
         }
     }
 }
