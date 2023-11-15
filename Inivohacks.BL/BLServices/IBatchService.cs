@@ -11,6 +11,7 @@ namespace Inivohacks.BL.BLServices
         public Task<BatchInformationDTO> GetBatchById(int batchId);
         public Task<bool> Recall(int batchId);
         public Task<bool> Delete(int batchId);
+        public Task<string> RebrandBatch(BatchDTO batch);
     }
 
 }

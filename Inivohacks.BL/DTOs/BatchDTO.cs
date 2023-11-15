@@ -16,5 +16,7 @@ namespace Inivohacks.BL.DTOs
         /// </summary>
         public int? OriginalBatchid { get; set; }
         public int Qty { get; set; }
+        public int LocationId { get; set; }
+        public string LocationName { get; set; }
     }
 }

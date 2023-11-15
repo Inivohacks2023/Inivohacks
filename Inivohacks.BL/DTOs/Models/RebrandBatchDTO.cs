@@ -1,7 +1,14 @@
-﻿namespace Inivohacks.ViewModels
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Inivohacks.BL.DTOs.Models
 {
-    public class BatchRequestModel
+    public class RebrandBatchDTO
     {
+  
         public int ProductId { get; set; }
         public DateTime ManufacturedDate { get; set; }
         public DateTime ExpiryDate { get; set; }
@@ -10,7 +17,5 @@
         /// </summary>
         public int? OriginalBatchid { get; set; }
         public int Qty { get; set; }
-        public int LocationId { get; set; }
-        public string LocationName { get; set; }
     }
 }

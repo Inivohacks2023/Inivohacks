@@ -1,9 +1,11 @@
-﻿using Inivohacks.BL.BLServices;
+﻿using Inivohacks.BL;
+using Inivohacks.BL.BLServices;
 using Inivohacks.BL.DTOs;
 using Inivohacks.DAL.Models;
 using Inivohacks.Mapper;
 using Inivohacks.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 
 namespace Inivohacks.Controllers
 {
@@ -18,7 +20,7 @@ namespace Inivohacks.Controllers
             _batchService = batchService;   
             
         }
-        [HttpPost]
+        [HttpPost("AddNewBatch")]
         public async Task<bool> AddBatch(BatchRequestModel model)
         {
            var obj= MapperExtentions.ToDto<BatchRequestModel, BatchDTO>(model);
@@ -26,14 +28,14 @@ namespace Inivohacks.Controllers
             return result;
         }
 
-        [HttpGet]
+        [HttpGet("FilterBatches")]
         public async Task<List<Batch>> GetAll(int? productId)
         {
             var result = await _batchService.GetAllBatchesAsync(productId);
             return result;
         }
 
-        [HttpGet("{batchId}")]
+        [HttpGet("GetBatchById/{batchId}")]
         public async Task<ActionResult<Batch>>  GetBatchById(int batchId)
         {
             var result = await _batchService.GetBatchById(batchId);
@@ -43,7 +45,18 @@ namespace Inivohacks.Controllers
             }
             return Ok();
         }
-        
+
+        [HttpPost("Rebrand")]
+        public async Task<ActionResult<Batch>> RebrandBatch(BatchDTO batch)
+        {
+            var result = await _batchService.RebrandBatch(batch);
+            if (result == StaticVariables.SuccessMessage)
+            {
+                return Json(result);
+            }
+            return StatusCode(500, result);
+        }
+
 
 
 
