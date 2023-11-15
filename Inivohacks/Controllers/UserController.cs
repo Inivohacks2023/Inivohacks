@@ -22,7 +22,7 @@ namespace Inivohacks.Controllers
                 return BadRequest(ModelState);
             }
 
-            status = await _userService.CreateUserAsync(
+            status = await _userService.CreateUserAsyncAsync(
                 MapperExtentions.ToDto<UserModel, UserDto>(viewModel));
 
             return Ok();
