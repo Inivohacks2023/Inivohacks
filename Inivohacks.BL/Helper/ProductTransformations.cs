@@ -1,10 +1,5 @@
 ﻿using Inivohacks.BL.DTOs;
 using Inivohacks.DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Inivohacks.BL.Helper
 {
@@ -17,7 +12,11 @@ namespace Inivohacks.BL.Helper
 
             var item = new ProductDto()
             {
-                
+                ProductID =product.ProductID,
+                ManufactureID = product.ManufacturerID,
+                Name = product.Name,
+                Dosage = product.Dosage,
+                PType = product.PType
             };
 
             return item;
@@ -30,6 +29,10 @@ namespace Inivohacks.BL.Helper
 
             var item = new Product()
             {
+                ManufacturerID = product.ManufactureID,
+                Name = product.Name,
+                Dosage = product.Dosage,
+                PType = product.PType
                 
 
             };

@@ -10,7 +10,7 @@ namespace Inivohacks.DAL.Repositories
         private readonly DatabaseContext _dbContext;
         public ManufacturerRepository(DatabaseContext dbContext) : base(dbContext)
         {
-            //this._dbContext = dbContext;
+            this._dbContext = dbContext;
         }
 
         public async Task<bool> AddManufacturerAsync(Manufacturer manufacturer)
@@ -19,19 +19,18 @@ namespace Inivohacks.DAL.Repositories
             return true;
         }
 
-        public IAsyncEnumerable<Manufacturer> GetAllManufacturerAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        //public async IAsyncEnumerable<Manufacturer> GetAllManufacturerAsync()
+        //public IAsyncEnumerable<Manufacturer> GetAllManufacturerAsync()
         //{
-        //    //foreach (var mlist in _dbContext.Manufacturers.ToList())
-        //    //{
-        //    //    yield return mlist;
-        //    //} 
-        //    var mlist;
-        //    return 
+        //    throw new NotImplementedException();
         //}
+
+        public async IAsyncEnumerable<Manufacturer> GetAllManufacturerAsync()
+        {
+            foreach (var mlist in _dbContext.Manufacturers.ToList())
+            {
+                yield return mlist;
+            }
+          
+        }
     }
 }
