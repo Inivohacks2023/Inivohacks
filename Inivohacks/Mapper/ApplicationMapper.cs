@@ -12,6 +12,8 @@ namespace Inivohacks.Mapper
             CreateMap<ManufacturerDto, ManufacturerModel>();
             CreateMap<ProductModel, ProductDto>();
             CreateMap<ProductDto, ProductModel>();
+            CreateMap<UserModel, UserDto>();
+            CreateMap<UserDto, UserModel>();
         }
     }
 

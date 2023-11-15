@@ -31,7 +31,7 @@ namespace Inivohacks.BL.Helper
                 Username = user.Username,
                 Password = user.Password,
                 ManufacturerID = user.ManufacturerID,
-                LoginDisabled = user.LoginDisabled
+                LoginDisabled = false //
 
             };
 

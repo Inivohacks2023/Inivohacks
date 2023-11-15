@@ -10,5 +10,7 @@ namespace Inivohacks.DAL.Repositories
     public interface IUserRepository : IRepository<User>
     {
         public Task<bool> AddUserAsync(User user);
+
+        public Task<User> GetUserbyUserIdAsync(int id);
     }
 }
