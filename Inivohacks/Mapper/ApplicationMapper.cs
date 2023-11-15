@@ -8,7 +8,10 @@ namespace Inivohacks.Mapper
     {
         public ApplicationMapper() 
         {
-            CreateMap<ManufacturerRequestModel, ManufacturerDto>();
+            CreateMap<ManufacturerModel, ManufacturerDto>();
+            CreateMap<ManufacturerDto, ManufacturerModel>();
+            CreateMap<ProductModel, ProductDto>();
+            CreateMap<ProductDto, ProductModel>();
         }
     }
 

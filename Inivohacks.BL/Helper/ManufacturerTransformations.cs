@@ -18,7 +18,11 @@ namespace Inivohacks.BL.Helper
 
             var item = new ManufacturerDto()
             {
-                
+                ManufacturerID = manufacturer.ManufacturerID,
+                Name = manufacturer.Name,
+                Address = manufacturer.Address,
+                NotifyEmail = manufacturer.NotifyEmail,
+                NotifySMS = manufacturer.NotifySMS
             };
 
             return item;

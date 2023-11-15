@@ -1,12 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Inivohacks.BL.BLServices;
+using Inivohacks.BL.DTOs;
+using Inivohacks.Mapper;
+using Inivohacks.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Inivohacks.Controllers
 {
     public class UserController : Controller
     {
-        public IActionResult Index()
+        private readonly IUserService _userService;
+        public UserController(IUserService userService)
         {
-            return View();
+            _userService = userService;
+        }
+        [HttpPost]
+        public async Task<IActionResult> UserCreation(UserModel viewModel)
+        {
+            bool status = false;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            status = await _userService.CreateUserAsync(
+                MapperExtentions.ToDto<UserModel, UserDto>(viewModel));
+
+            return Ok();
         }
     }
 }

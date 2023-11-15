@@ -9,12 +9,14 @@ namespace Inivohacks.DAL.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         
-        public Guid ScanID { get; set; }
+        public int ScanID { get; set; }
+
+        public Guid ScanGuid { get; set; }
         public Guid TrackingCodeID { get; set; }
         public int UserID { get; set; }
         public string InteractionType { get; set; }
         public int InteractionDescription { get; set; }
-        public int CertificateID { get; set; }
+        public int CertificationID { get; set; }
         
 
         public virtual User User { get; set; }

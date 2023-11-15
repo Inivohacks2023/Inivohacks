@@ -25,14 +25,12 @@ namespace Inivohacks.DAL.DataContext
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
-            builder.Entity<Scan>()
-            .HasOne(e => e.User)
-             .WithMany().HasForeignKey(e=>e.UserID)
-    .       OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Scan>().HasOne(e => e.User)
+                .WithMany(u => u.Scans).HasForeignKey(e => e.UserID).OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Scan>()
            .HasOne(e => e.Certificate)
-            .WithMany().HasForeignKey(e => e.CertificateID)
+            .WithMany().HasForeignKey(e => e.CertificationID)
             .OnDelete(DeleteBehavior.Restrict);
 
         }
