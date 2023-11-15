@@ -18,7 +18,7 @@ namespace Inivohacks.BL.BLServices
         {
             this.userRepository = userRepository;
         }
-        public async Task<bool> CreateUserAsyncAsync(UserDto user)
+        public async Task<bool> CreateUserAsync(UserDto user)
         {
             bool status = false;
             if (user == null)
