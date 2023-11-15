@@ -1,5 +1,4 @@
 ﻿using Inivohacks.BL.DTOs;
-using Inivohacks.DAL.Migrations;
 using Inivohacks.DAL.Models;
 using Inivohacks.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +15,7 @@ namespace Inivohacks.BL.BLServices
 
 
         }
-        public async Task<bool> CreateBatchAsync(BatchDTO batch)
+        public async Task<Batch> CreateBatchAsync(BatchDTO batch)
         {
             bool status = false;
             if (batch == null)
@@ -31,17 +30,19 @@ namespace Inivohacks.BL.BLServices
                     ManufacturedDate = batch.ManufacturedDate,
                     ExpiryDate = batch.ExpiryDate,
                     OriginalBatchid = batch.OriginalBatchid,
-                    Qty = batch.Qty
+                    Qty = batch.Qty,
+                    LocationId = batch.LocationId,
+                    LocationName = batch.LocationName,
                 };
 
-                _iBatchRepository.AddAsync(obj);
-                status = true;
+                var returnObj = await _iBatchRepository.AddbatchAsync(obj);
+                return returnObj;
             }
-            catch
+            catch (Exception e)
             {
-                status = false;
+                throw e;
             }
-            return status;
+
         }
 
         public async Task<List<Batch>> GetAllBatchesAsync(int? productId)
@@ -126,12 +127,13 @@ namespace Inivohacks.BL.BLServices
 
                 var rebrandedBatch = new Batch()
                 {
-                    ProductId = batchToRebrand.ProductId,
-                    ManufacturedDate=batchToRebrand.ManufacturedDate,
-                    ExpiryDate=batchToRebrand.ExpiryDate,  
-                    OriginalBatchid= batchToRebrand.OriginalBatchid,
-                    Qty=batchToRebrand.Qty,
-                    LocationId=batchToRebrand.LocationId,
+                    ProductId = batch.ProductId,
+                    ManufacturedDate = batch.ManufacturedDate,
+                    ExpiryDate = batch.ExpiryDate,
+                    OriginalBatchid = batch.OriginalBatchid,
+                    Qty = batch.Qty,
+                    LocationId = batch.LocationId,
+                    LocationName = batch.LocationName,
 
                 };
                 await _iBatchRepository.AddAsync(rebrandedBatch);
@@ -142,6 +144,21 @@ namespace Inivohacks.BL.BLServices
                 return e.ToString(); ;
             }
         }
-          
+
+        public async Task<string> UpdateOwner(int batchid, int locationId, string locationName)
+        {
+            var batchToRebrand = await _iBatchRepository.Search(o => o.Id == batchid).SingleOrDefaultAsync();
+
+            if (batchToRebrand == null)
+            {
+                return "Batch with gicen Id not found";
+            }
+            batchToRebrand.LocationName = locationName;
+            batchToRebrand.LocationId = locationId;
+            await _iBatchRepository.UpdateAsync(batchToRebrand);
+            return StaticVariables.SuccessMessage;
+
+        }
+
     }
 }

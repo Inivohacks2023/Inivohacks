@@ -16,13 +16,18 @@ namespace Inivohacks.DAL.Repositories
         {
             //using (var context = _dbContext)
             //{
-                try
-                {
-                        await _dbContext.AddAsync(entity);
-                         _dbContext.SaveChanges();
-                }
+            try
+            {
+                await _dbContext.AddAsync(entity);
+                _dbContext.SaveChanges();
+            }
 
-                catch (Exception ex) { }
+            catch (Exception ex) {
+
+                throw ex;
+            }
+            
+             
             //}
         
             return entity;

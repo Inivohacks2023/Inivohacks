@@ -9,5 +9,6 @@ namespace Inivohacks.DAL.Repositories
 {
     public interface IBatchRepository : IRepository<Batch>
     {
+        Task<Batch> AddbatchAsync(Batch batch);
     }
 }

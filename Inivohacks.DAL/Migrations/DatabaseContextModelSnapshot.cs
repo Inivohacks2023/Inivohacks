@@ -202,9 +202,6 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ManufactureID")
-                        .HasColumnType("int");
-
                     b.Property<int>("ManufacturerID")
                         .HasColumnType("int");
 
@@ -225,14 +222,16 @@ namespace Inivohacks.DAL.Migrations
 
             modelBuilder.Entity("Inivohacks.DAL.Models.Scan", b =>
                 {
-                    b.Property<Guid>("ScanID")
+                    b.Property<int>("ScanID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScanID"));
 
                     b.Property<int?>("CertificateCertificationID")
                         .HasColumnType("int");
 
-                    b.Property<int>("CertificateID")
+                    b.Property<int>("CertificationID")
                         .HasColumnType("int");
 
                     b.Property<int>("InteractionDescription")
@@ -242,26 +241,24 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("ScanGuid")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("TrackingCodeID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserID1")
-                        .HasColumnType("int");
-
                     b.HasKey("ScanID");
 
                     b.HasIndex("CertificateCertificationID");
 
-                    b.HasIndex("CertificateID");
+                    b.HasIndex("CertificationID");
 
                     b.HasIndex("TrackingCodeID");
 
                     b.HasIndex("UserID");
-
-                    b.HasIndex("UserID1");
 
                     b.ToTable("Scans");
                 });
@@ -381,7 +378,7 @@ namespace Inivohacks.DAL.Migrations
 
                     b.HasOne("Inivohacks.DAL.Models.Certificate", "Certificate")
                         .WithMany()
-                        .HasForeignKey("CertificateID")
+                        .HasForeignKey("CertificationID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -392,14 +389,10 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("Inivohacks.DAL.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Scans")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("Inivohacks.DAL.Models.User", null)
-                        .WithMany("Scans")
-                        .HasForeignKey("UserID1");
 
                     b.Navigation("Certificate");
 

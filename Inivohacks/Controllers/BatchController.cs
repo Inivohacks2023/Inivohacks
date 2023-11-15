@@ -21,29 +21,59 @@ namespace Inivohacks.Controllers
             
         }
         [HttpPost("AddNewBatch")]
-        public async Task<bool> AddBatch(BatchRequestModel model)
+        public async Task<ActionResult<Batch>> AddBatch(BatchRequestModel model)
         {
-           var obj= MapperExtentions.ToDto<BatchRequestModel, BatchDTO>(model);
-            var result = await _batchService.CreateBatchAsync(obj);
-            return result;
+            try
+            {
+                var obj = MapperExtentions.ToDto<BatchRequestModel, BatchDTO>(model);
+                var result = await _batchService.CreateBatchAsync(obj);
+                return Ok(result);
+
+            }
+            catch (Exception e)
+            { 
+            return StatusCode(500, e.Message);
+            }
         }
 
         [HttpGet("FilterBatches")]
-        public async Task<List<Batch>> GetAll(int? productId)
+        public async Task<ActionResult<List<Batch>>> GetAll(int? productId)
         {
-            var result = await _batchService.GetAllBatchesAsync(productId);
-            return result;
+            try
+            {
+                var result = await _batchService.GetAllBatchesAsync(productId);
+                return result;
+
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+
+            }
+           
         }
 
-        [HttpGet("GetBatchById/{batchId}")]
+        [HttpGet("ScanForDetails/{batchId}")]
         public async Task<ActionResult<Batch>>  GetBatchById(int batchId)
         {
-            var result = await _batchService.GetBatchById(batchId);
-            if (result != null)
+            try
             {
-                return Json(result);
+                var result = await _batchService.GetBatchById(batchId);
+                if (result != null)
+                {
+                    return Json(result);
+                }
+
+                return StatusCode(500, "Object with given id not found");
+
+
+
             }
-            return Ok();
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+            
         }
 
         [HttpPost("Rebrand")]
@@ -59,14 +89,27 @@ namespace Inivohacks.Controllers
 
 
 
+        [HttpPut("ScanToUpdateOwner")]
+        public async Task<ActionResult<string>> ScanToUpdateOwner(int batchid, int locationId, string locationName)
+        {
 
+            var result = await _batchService.UpdateOwner(batchid: batchid,locationId:locationId,locationName:locationName); ;
+            if (result == StaticVariables.SuccessMessage)
+            {
+                return Json(result);
+            }
+            return StatusCode(500, result);
+        }
 
         [HttpPut("Recall/{batchId}")]
         public async Task<bool> Recall(int batchId)
         {
+            
             var result = await _batchService.Recall(batchId);
             return result;
         }
+
+
         [HttpDelete("Delete/{batchId}")]
         public async Task<bool> Delete(int batchId)
         {
