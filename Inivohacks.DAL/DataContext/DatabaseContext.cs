@@ -28,11 +28,6 @@ namespace Inivohacks.DAL.DataContext
             builder.Entity<Scan>().HasOne(e => e.User)
                 .WithMany(u => u.Scans).HasForeignKey(e => e.UserID).OnDelete(DeleteBehavior.Restrict);
 
-            // builder.Entity<Scan>()
-            //.HasOne(e => e.Certificate)
-            // .WithMany().HasForeignKey(e => e.CertificateID)
-            // .OnDelete(DeleteBehavior.Restrict);
-
              builder.Entity<Scan>()
                 .HasOne(s => s.TrackingCode)
                 .WithMany(tc => tc.Scans)
@@ -45,25 +40,28 @@ namespace Inivohacks.DAL.DataContext
 
         private void SeedDatabase(ModelBuilder builder)
         {
-            //builder.Entity<Manufacturer>()
-            //    .HasData(new Manufacturer
-            //    {
-            //        //ID = 1
-            //        Name = "Walter White Pharmaceuticals",
-            //        NotifySMS = "+1 1234567890",
-            //        NotifyEmail = "walter.white@example.com",
-            //        Address = "308 Negro Aroya Lane, Alberquerqe, New Mexico",
-            //    });
+            builder.Entity<Manufacturer>()
+                .HasData(new Manufacturer
+                {
+                    //ID = 1
+                    ManufacturerID = 1,
+                    Name = "Walter White Pharmaceuticals",
+                    NotifySMS = "+1 1234567890",
+                    NotifyEmail = "walter.white@example.com",
+                    Address = "308 Negro Aroya Lane, Alberquerqe, New Mexico",
+                });
 
-            //builder.Entity<User>()
-            //    .HasData(new User
-            //    {
-            //        //ID = 1
-            //        Name = "Walter White Pharmaceuticals",
-            //        NotifySMS = "+1 1234567890",
-            //        NotifyEmail = "walter.white@example.com",
-            //        Address = "308 Negro Aroya Lane, Alberquerqe, New Mexico",
-            //    }); ;
+            builder.Entity<User>()
+                .HasData(new User
+                {
+                    UserID = 1,
+                    FirstName = "Jesse",
+                    LastName = "Pinkman",
+                    LoginDisabled = false,
+                    ManufacturerID = 1,
+                    Password = "123",
+                    Username = "jesse"
+                }); ;
         }
     }
 }
