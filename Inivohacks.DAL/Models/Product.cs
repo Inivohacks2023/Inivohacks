@@ -9,7 +9,7 @@ namespace Inivohacks.DAL.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductID { get; set; }
-        public int ManufactureID { get; set; }
+        public int ManufacturerID { get; set; }
         public string Name { get; set; }
         public string Dosage { get; set; }
         public string  PType { get; set; }

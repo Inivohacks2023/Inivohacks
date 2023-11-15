@@ -12,6 +12,8 @@ builder.Services.AddScoped<IManufactureService, ManufactureService>();
 builder.Services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
 builder.Services.AddScoped<ICodeService, CodeService>();
 builder.Services.AddScoped<ITrackingCodeRepository, TrackingCodeRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -25,7 +27,7 @@ builder.Services.AddSwaggerGen(options =>
         Description = "API for Hackathon App"
     });
 
-    });
+});
 
 var app = builder.Build();
 

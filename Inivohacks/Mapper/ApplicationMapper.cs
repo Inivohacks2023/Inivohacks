@@ -4,12 +4,15 @@ using Inivohacks.ViewModels;
 
 namespace Inivohacks.Mapper
 {
-    public class ApplicationMapper :  Profile
+    public class ApplicationMapper : Profile
     {
-        public ApplicationMapper() 
+        public ApplicationMapper()
         {
-            CreateMap<ManufacturerRequestModel, ManufacturerDto>();
-            CreateMap<AddCodeRequestModel,CodeDto>();
+            CreateMap<ManufacturerModel, ManufacturerDto>();
+            CreateMap<ManufacturerDto, ManufacturerModel>();
+            CreateMap<ProductModel, ProductDto>();
+            CreateMap<ProductDto, ProductModel>();
+            CreateMap<AddCodeRequestModel, CodeDto>();
         }
     }
 

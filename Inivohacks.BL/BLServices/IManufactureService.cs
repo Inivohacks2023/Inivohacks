@@ -10,5 +10,7 @@ namespace Inivohacks.BL.BLServices
     public interface IManufactureService
     {
         public  Task<bool> CreateManufactureAsync(ManufacturerDto manufactuer);
+
+        public IAsyncEnumerable<ManufacturerDto> GetAllManufacturerAsync();
     }
 }

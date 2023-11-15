@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Inivohacks.BL.BLServices
 {
-    public interface IUserService
+    public interface IProductService
     {
-        public Task<bool> CreateUserAsyncAsync(UserDto user);
+        public Task<bool> CreateProductAsync(ProductDto product);
+        public Task<ProductDto> GetProductByIDAsync(int productIdString);
     }
 }
