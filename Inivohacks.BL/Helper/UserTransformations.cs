@@ -28,10 +28,12 @@ namespace Inivohacks.BL.Helper
 
             var item = new User()
             {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 Username = user.Username,
-                Password = user.Password,
+                Password = user.Password, //Encrypt this before saving in DB (Don't store raw password in DB)
                 ManufacturerID = user.ManufacturerID,
-                LoginDisabled = false //
+                LoginDisabled = false //Enable user to login by default 
 
             };
 
