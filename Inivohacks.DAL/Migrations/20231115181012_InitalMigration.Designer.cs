@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inivohacks.DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20231112051912_UpdateRelationships")]
-    partial class UpdateRelationships
+    [Migration("20231115181012_InitalMigration")]
+    partial class InitalMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,11 +50,11 @@ namespace Inivohacks.DAL.Migrations
 
             modelBuilder.Entity("Inivohacks.DAL.Models.Certificate", b =>
                 {
-                    b.Property<int>("CertificationID")
+                    b.Property<int>("CertificateID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CertificationID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CertificateID"));
 
                     b.Property<DateTime>("ExpiryDate")
                         .HasColumnType("datetime2");
@@ -65,7 +65,7 @@ namespace Inivohacks.DAL.Migrations
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
-                    b.HasKey("CertificationID");
+                    b.HasKey("CertificateID");
 
                     b.HasIndex("ProductID");
 
@@ -134,9 +134,6 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ManufactureID")
-                        .HasColumnType("int");
-
                     b.Property<int>("ManufacturerID")
                         .HasColumnType("int");
 
@@ -157,12 +154,11 @@ namespace Inivohacks.DAL.Migrations
 
             modelBuilder.Entity("Inivohacks.DAL.Models.Scan", b =>
                 {
-                    b.Property<Guid>("ScanID")
+                    b.Property<int>("ScanID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("CertificateCertificationID")
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScanID"));
 
                     b.Property<int>("CertificateID")
                         .HasColumnType("int");
@@ -174,26 +170,22 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("ScanGuid")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("TrackingCodeID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserID1")
-                        .HasColumnType("int");
-
                     b.HasKey("ScanID");
-
-                    b.HasIndex("CertificateCertificationID");
 
                     b.HasIndex("CertificateID");
 
                     b.HasIndex("TrackingCodeID");
 
                     b.HasIndex("UserID");
-
-                    b.HasIndex("UserID1");
 
                     b.ToTable("Scans");
                 });
@@ -242,6 +234,14 @@ namespace Inivohacks.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LoginDisabled")
                         .HasColumnType("bit");
@@ -307,31 +307,23 @@ namespace Inivohacks.DAL.Migrations
 
             modelBuilder.Entity("Inivohacks.DAL.Models.Scan", b =>
                 {
-                    b.HasOne("Inivohacks.DAL.Models.Certificate", null)
-                        .WithMany("Scans")
-                        .HasForeignKey("CertificateCertificationID");
-
                     b.HasOne("Inivohacks.DAL.Models.Certificate", "Certificate")
-                        .WithMany()
+                        .WithMany("Scans")
                         .HasForeignKey("CertificateID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Inivohacks.DAL.Models.TrackingCode", "TrackingCode")
                         .WithMany("Scans")
                         .HasForeignKey("TrackingCodeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Inivohacks.DAL.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Inivohacks.DAL.Models.User", null)
+                    b.HasOne("Inivohacks.DAL.Models.User", "User")
                         .WithMany("Scans")
-                        .HasForeignKey("UserID1");
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Certificate");
 
