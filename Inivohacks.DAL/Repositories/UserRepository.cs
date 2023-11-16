@@ -19,8 +19,25 @@ namespace Inivohacks.DAL.Repositories
 
         public async Task<bool> AddUserAsync(User user)
         {
-            await AddAsync(user);
-            return true;
+            try { 
+                var result = await AddAsync(user);
+                return true;
+            } catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<User> GetUserbyUserIdAsync(int id)
+        {
+            try { 
+                User user = await _dbContext.Users.FindAsync(id) ?? new User();
+                return user;
+            }
+            catch (Exception ex)
+            {
+                return new User();
+            }
         }
     }
 }

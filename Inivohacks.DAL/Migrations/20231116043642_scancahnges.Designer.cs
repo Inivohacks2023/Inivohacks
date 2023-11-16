@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inivohacks.DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20231112051912_UpdateRelationships")]
-    partial class UpdateRelationships
+    [Migration("20231116043642_scancahnges")]
+    partial class scancahnges
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,77 @@ namespace Inivohacks.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Inivohacks.DAL.Models.Batch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LocationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ManufacturedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("OriginalBatchid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Batch");
+                });
+
+            modelBuilder.Entity("Inivohacks.DAL.Models.BatchItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BatchId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LocationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BatchItem");
+                });
 
             modelBuilder.Entity("Inivohacks.DAL.Models.CertPermission", b =>
                 {
@@ -50,11 +121,11 @@ namespace Inivohacks.DAL.Migrations
 
             modelBuilder.Entity("Inivohacks.DAL.Models.Certificate", b =>
                 {
-                    b.Property<int>("CertificationID")
+                    b.Property<int>("CertificateID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CertificationID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CertificateID"));
 
                     b.Property<DateTime>("ExpiryDate")
                         .HasColumnType("datetime2");
@@ -65,7 +136,7 @@ namespace Inivohacks.DAL.Migrations
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
-                    b.HasKey("CertificationID");
+                    b.HasKey("CertificateID");
 
                     b.HasIndex("ProductID");
 
@@ -99,6 +170,16 @@ namespace Inivohacks.DAL.Migrations
                     b.HasKey("ManufacturerID");
 
                     b.ToTable("Manufacturers");
+
+                    b.HasData(
+                        new
+                        {
+                            ManufacturerID = 1,
+                            Address = "308 Negro Aroya Lane, Alberquerqe, New Mexico",
+                            Name = "Walter White Pharmaceuticals",
+                            NotifyEmail = "walter.white@example.com",
+                            NotifySMS = "+1 1234567890"
+                        });
                 });
 
             modelBuilder.Entity("Inivohacks.DAL.Models.Permission", b =>
@@ -134,9 +215,6 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ManufactureID")
-                        .HasColumnType("int");
-
                     b.Property<int>("ManufacturerID")
                         .HasColumnType("int");
 
@@ -157,12 +235,11 @@ namespace Inivohacks.DAL.Migrations
 
             modelBuilder.Entity("Inivohacks.DAL.Models.Scan", b =>
                 {
-                    b.Property<Guid>("ScanID")
+                    b.Property<int>("ScanID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("CertificateCertificationID")
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScanID"));
 
                     b.Property<int>("CertificateID")
                         .HasColumnType("int");
@@ -174,26 +251,34 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Latitude")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LocationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Longitude")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ScanGuid")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("TrackingCodeID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserID1")
-                        .HasColumnType("int");
-
                     b.HasKey("ScanID");
-
-                    b.HasIndex("CertificateCertificationID");
 
                     b.HasIndex("CertificateID");
 
                     b.HasIndex("TrackingCodeID");
 
                     b.HasIndex("UserID");
-
-                    b.HasIndex("UserID1");
 
                     b.ToTable("Scans");
                 });
@@ -228,6 +313,9 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("TrackingCodeCreatedTimeStamp")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("TrackingCodeID");
 
                     b.HasIndex("ProductID");
@@ -242,6 +330,14 @@ namespace Inivohacks.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LoginDisabled")
                         .HasColumnType("bit");
@@ -262,6 +358,18 @@ namespace Inivohacks.DAL.Migrations
                     b.HasIndex("ManufacturerID");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserID = 1,
+                            FirstName = "Jesse",
+                            LastName = "Pinkman",
+                            LoginDisabled = false,
+                            ManufacturerID = 1,
+                            Password = "123",
+                            Username = "jesse"
+                        });
                 });
 
             modelBuilder.Entity("Inivohacks.DAL.Models.CertPermission", b =>
@@ -288,7 +396,7 @@ namespace Inivohacks.DAL.Migrations
                     b.HasOne("Inivohacks.DAL.Models.Product", "Product")
                         .WithMany("Certificates")
                         .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Product");
@@ -307,31 +415,23 @@ namespace Inivohacks.DAL.Migrations
 
             modelBuilder.Entity("Inivohacks.DAL.Models.Scan", b =>
                 {
-                    b.HasOne("Inivohacks.DAL.Models.Certificate", null)
-                        .WithMany("Scans")
-                        .HasForeignKey("CertificateCertificationID");
-
                     b.HasOne("Inivohacks.DAL.Models.Certificate", "Certificate")
-                        .WithMany()
+                        .WithMany("Scans")
                         .HasForeignKey("CertificateID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Inivohacks.DAL.Models.TrackingCode", "TrackingCode")
                         .WithMany("Scans")
                         .HasForeignKey("TrackingCodeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Inivohacks.DAL.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Inivohacks.DAL.Models.User", null)
+                    b.HasOne("Inivohacks.DAL.Models.User", "User")
                         .WithMany("Scans")
-                        .HasForeignKey("UserID1");
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Certificate");
 
@@ -342,13 +442,13 @@ namespace Inivohacks.DAL.Migrations
 
             modelBuilder.Entity("Inivohacks.DAL.Models.TrackingCode", b =>
                 {
-                    b.HasOne("Inivohacks.DAL.Models.Product", "product")
-                        .WithMany()
+                    b.HasOne("Inivohacks.DAL.Models.Product", "Product")
+                        .WithMany("TrackingCodes")
                         .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("product");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Inivohacks.DAL.Models.User", b =>
@@ -384,6 +484,8 @@ namespace Inivohacks.DAL.Migrations
             modelBuilder.Entity("Inivohacks.DAL.Models.Product", b =>
                 {
                     b.Navigation("Certificates");
+
+                    b.Navigation("TrackingCodes");
                 });
 
             modelBuilder.Entity("Inivohacks.DAL.Models.TrackingCode", b =>

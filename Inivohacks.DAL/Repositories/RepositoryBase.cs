@@ -14,18 +14,10 @@ namespace Inivohacks.DAL.Repositories
 
         public async Task<TEntity> AddAsync(TEntity entity)
         {
-            //using (var context = _dbContext)
-            //{
-            try
-            {
-                await _dbContext.AddAsync(entity);
-                _dbContext.SaveChanges();
-            }
-
-            catch (Exception ex) { }
-            //}
-
+            await _dbContext.AddAsync(entity);
+            _dbContext.SaveChanges();
             return entity;
+
         }
 
         public async Task<TEntity> UpdateAsync(TEntity entity)

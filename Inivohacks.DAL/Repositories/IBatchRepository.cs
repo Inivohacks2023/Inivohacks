@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Inivohacks.DAL.Repositories
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IBatchRepository : IRepository<Batch>
     {
-        public Task<bool> AddUserAsync(User user);
-
-        public Task<User> GetUserbyUserIdAsync(int id);
+        Task<Batch> AddbatchAsync(Batch batch);
     }
 }
