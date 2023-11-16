@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inivohacks.DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20231115050656_TEst1")]
-    partial class TEst1
+    [Migration("20231115101618_set3")]
+    partial class set3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -356,7 +356,7 @@ namespace Inivohacks.DAL.Migrations
                     b.HasOne("Inivohacks.DAL.Models.Product", "Product")
                         .WithMany("Certificates")
                         .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Product");
@@ -386,7 +386,7 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("Inivohacks.DAL.Models.TrackingCode", "TrackingCode")
-                        .WithMany("Scans")
+                        .WithMany()
                         .HasForeignKey("TrackingCodeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -406,13 +406,13 @@ namespace Inivohacks.DAL.Migrations
 
             modelBuilder.Entity("Inivohacks.DAL.Models.TrackingCode", b =>
                 {
-                    b.HasOne("Inivohacks.DAL.Models.Product", "product")
-                        .WithMany()
+                    b.HasOne("Inivohacks.DAL.Models.Product", "Product")
+                        .WithMany("TrackingCodes")
                         .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("product");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Inivohacks.DAL.Models.User", b =>
@@ -448,11 +448,8 @@ namespace Inivohacks.DAL.Migrations
             modelBuilder.Entity("Inivohacks.DAL.Models.Product", b =>
                 {
                     b.Navigation("Certificates");
-                });
 
-            modelBuilder.Entity("Inivohacks.DAL.Models.TrackingCode", b =>
-                {
-                    b.Navigation("Scans");
+                    b.Navigation("TrackingCodes");
                 });
 
             modelBuilder.Entity("Inivohacks.DAL.Models.User", b =>

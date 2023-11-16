@@ -4,6 +4,7 @@ using Inivohacks.DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inivohacks.DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231115084750_TEst1")]
+    partial class TEst1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,18 +244,6 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Latitude")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LocationName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Longitude")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("ScanGuid")
                         .HasColumnType("uniqueidentifier");
 
@@ -292,9 +283,6 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("PreviousTrackingCodeId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
@@ -308,12 +296,7 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("TrackingCodeCreatedTimeStamp")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("TrackingCodeID");
-
-                    b.HasIndex("ProductID");
 
                     b.ToTable("TrackingCodes");
                 });
@@ -371,7 +354,7 @@ namespace Inivohacks.DAL.Migrations
                     b.HasOne("Inivohacks.DAL.Models.Product", "Product")
                         .WithMany("Certificates")
                         .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
@@ -419,17 +402,6 @@ namespace Inivohacks.DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Inivohacks.DAL.Models.TrackingCode", b =>
-                {
-                    b.HasOne("Inivohacks.DAL.Models.Product", "Product")
-                        .WithMany("TrackingCodes")
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Inivohacks.DAL.Models.User", b =>
                 {
                     b.HasOne("Inivohacks.DAL.Models.Manufacturer", "Manufacturer")
@@ -463,8 +435,6 @@ namespace Inivohacks.DAL.Migrations
             modelBuilder.Entity("Inivohacks.DAL.Models.Product", b =>
                 {
                     b.Navigation("Certificates");
-
-                    b.Navigation("TrackingCodes");
                 });
 
             modelBuilder.Entity("Inivohacks.DAL.Models.User", b =>

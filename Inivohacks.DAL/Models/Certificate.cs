@@ -13,7 +13,7 @@ namespace Inivohacks.DAL.Models
         public bool InUse { get; set; }
         public DateTime ExpiryDate { get; set; }
        
-        public virtual Product Product { get; set;}
+        public  Product Product { get; set;}
         public ICollection<CertPermission> CertPermissions { get; set; }
         public ICollection<Scan> Scans { get; set; }
        

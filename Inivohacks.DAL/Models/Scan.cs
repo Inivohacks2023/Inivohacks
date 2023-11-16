@@ -17,8 +17,10 @@ namespace Inivohacks.DAL.Models
         public string InteractionType { get; set; }
         public int InteractionDescription { get; set; }
         public int CertificationID { get; set; }
-        
 
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        public string LocationName { get; set; }
         public virtual User User { get; set; }
         public virtual TrackingCode TrackingCode { get; set; }
         public virtual Certificate Certificate { get; set; }

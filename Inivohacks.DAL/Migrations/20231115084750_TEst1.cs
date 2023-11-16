@@ -80,6 +80,24 @@ namespace Inivohacks.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TrackingCodes",
+                columns: table => new
+                {
+                    TrackingCodeID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductID = table.Column<int>(type: "int", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BatchNumber = table.Column<int>(type: "int", nullable: false),
+                    SerialNumber = table.Column<int>(type: "int", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RecallStatus = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TrackingCodes", x => x.TrackingCodeID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -138,30 +156,6 @@ namespace Inivohacks.DAL.Migrations
                     table.PrimaryKey("PK_Certificates", x => x.CertificationID);
                     table.ForeignKey(
                         name: "FK_Certificates_Products_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Products",
-                        principalColumn: "ProductID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TrackingCodes",
-                columns: table => new
-                {
-                    TrackingCodeID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BatchNumber = table.Column<int>(type: "int", nullable: false),
-                    SerialNumber = table.Column<int>(type: "int", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RecallStatus = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TrackingCodes", x => x.TrackingCodeID);
-                    table.ForeignKey(
-                        name: "FK_TrackingCodes_Products_ProductID",
                         column: x => x.ProductID,
                         principalTable: "Products",
                         principalColumn: "ProductID",
@@ -275,11 +269,6 @@ namespace Inivohacks.DAL.Migrations
                 name: "IX_Scans_UserID",
                 table: "Scans",
                 column: "UserID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TrackingCodes_ProductID",
-                table: "TrackingCodes",
-                column: "ProductID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_ManufacturerID",

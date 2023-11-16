@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Inivohacks.BL.DTOs;
+using Inivohacks.BL.DTOs.Models;
 using Inivohacks.DAL.Models;
 using Inivohacks.ViewModels;
 
@@ -18,6 +19,7 @@ namespace Inivohacks.Mapper
             CreateMap<ManufacturerDto, ManufacturerModel>();
             CreateMap<ProductModel, ProductDto>();
             CreateMap<ProductDto, ProductModel>();
+            CreateMap<TrackingCodeDTO, TrackingCode>();
         }
     }
 

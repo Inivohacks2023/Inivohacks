@@ -35,6 +35,13 @@ namespace Inivohacks.DAL.DataContext
             .WithMany().HasForeignKey(e => e.CertificationID)
             .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<TrackingCode>()
+                .HasOne(e => e.Product)
+                .WithMany(e => e.TrackingCodes).HasForeignKey(e=>e.ProductID).OnDelete(DeleteBehavior.Restrict); 
+
+           builder.Entity<Certificate>()
+                .HasOne(e => e.Product)
+                .WithMany(e => e.Certificates).HasForeignKey(e => e.ProductID).OnDelete(DeleteBehavior.Restrict); ;
         }
 
     }
