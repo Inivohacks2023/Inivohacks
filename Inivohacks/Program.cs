@@ -29,9 +29,13 @@ builder.Services.AddScoped<IManufactureService, ManufactureService>();
 builder.Services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IBatchService, BatchService>();
+builder.Services.AddScoped<IBatchRepository, BatchRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-
+builder.Services.AddScoped<IScanService, ScanService>();
+builder.Services.AddScoped<ITrackingCodeRepositoryForScan, TrackingCodeRepositoryForScan>();
+builder.Services.AddScoped<IScanRepository, ScanRepository>();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<DatabaseContext>(options =>

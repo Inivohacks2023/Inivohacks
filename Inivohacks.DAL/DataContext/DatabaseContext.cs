@@ -21,6 +21,8 @@ namespace Inivohacks.DAL.DataContext
         public DbSet<TrackingCode> TrackingCodes { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<CertPermission> CertPermissions { get; set; }
+        public DbSet<Batch> Batch { get; set; }
+        public DbSet<BatchItem> BatchItem { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -36,6 +38,13 @@ namespace Inivohacks.DAL.DataContext
 
             //Create Dummy Data 
             SeedDatabase(builder);
+            builder.Entity<TrackingCode>()
+                .HasOne(e => e.Product)
+                .WithMany(e => e.TrackingCodes).HasForeignKey(e=>e.ProductID).OnDelete(DeleteBehavior.Restrict); 
+
+           builder.Entity<Certificate>()
+                .HasOne(e => e.Product)
+                .WithMany(e => e.Certificates).HasForeignKey(e => e.ProductID).OnDelete(DeleteBehavior.Restrict); ;
         }
 
         private void SeedDatabase(ModelBuilder builder)

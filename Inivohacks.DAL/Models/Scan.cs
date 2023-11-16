@@ -20,6 +20,9 @@ namespace Inivohacks.DAL.Models
         
 
 		public virtual User User { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        public string LocationName { get; set; }
         public virtual TrackingCode TrackingCode { get; set; }
         public virtual Certificate Certificate { get; set; }
         
