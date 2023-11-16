@@ -36,7 +36,7 @@ namespace Inivohacks.Controllers
             int productID = 0;
             if (Request.Headers.TryGetValue("productId", out var productId))
             {
-                productID =Convert.ToInt32(productId);
+                productID = Convert.ToInt32(productId);
             }
             var productItem = await _productService.GetProductByIDAsync(productID);
             if (productItem == null)

@@ -35,7 +35,7 @@ namespace Inivohacks.Controllers
         {
             List<ManufacturerModel> manufacturerModelsList = new List<ManufacturerModel>();
 
-            IAsyncEnumerable<ManufacturerDto> manufacturerList =  _manufacturerService.GetAllManufacturerAsync();
+            IAsyncEnumerable<ManufacturerDto> manufacturerList = _manufacturerService.GetAllManufacturerAsync();
             if (manufacturerList == null)
             {
                 return NotFound();

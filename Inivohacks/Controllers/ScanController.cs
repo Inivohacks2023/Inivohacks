@@ -1,9 +1,7 @@
 ﻿using Inivohacks.BL.BLServices;
-using Inivohacks.BL.DTOs;
 using Inivohacks.BL.DTOs.Models;
 using Inivohacks.DAL.Models;
 using Inivohacks.Mapper;
-using Inivohacks.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inivohacks.Controllers
@@ -17,7 +15,7 @@ namespace Inivohacks.Controllers
         public ScanController(IScanService iscanService)
         {
             _iscanService = iscanService;
-            
+
         }
         [HttpGet("ScanForDetails/{TrackingCodeID}")]
         public async Task<ActionResult<ScannedItemInfomationModel>> GetBatchById(Guid TrackingCodeID)
@@ -53,10 +51,10 @@ namespace Inivohacks.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500,e.Message);
-            
+                return StatusCode(500, e.Message);
+
             }
-            
+
 
         }
         [HttpPut("Rebrand")]
@@ -64,7 +62,7 @@ namespace Inivohacks.Controllers
         {
             try
             {
-               
+
                 var result = await _iscanService.Rebrand(rebrandObj);
                 return Ok(result);
             }

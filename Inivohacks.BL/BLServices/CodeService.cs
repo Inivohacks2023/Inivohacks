@@ -1,6 +1,8 @@
 ﻿using Inivohacks.BL.DTOs;
 using Inivohacks.DAL.Models;
 using Inivohacks.DAL.Repositories;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Reflection.Metadata;
 
 namespace Inivohacks.BL.BLServices
@@ -18,7 +20,7 @@ namespace Inivohacks.BL.BLServices
         public async Task<CodeResponseDto> GenerateCodeAsync(int NoProducts,CodeDto codeDto)
         {
             List<TrackingCode> codes = new List<TrackingCode>();
-            
+            List<string> guids = new List<string>();
             Product product = await _productRepository.GetProductbyProductIdAsync(codeDto.ProductId);
             
             if (product == null)
@@ -29,23 +31,31 @@ namespace Inivohacks.BL.BLServices
             foreach (int item in Enumerable.Range(1, NoProducts))
             {
                 Guid codeId = new Guid(item, (short)codeDto.BatchNumber,(short)product.ProductID,new byte[] { 1,2,3,4,5,6,7,8});
-                
+                guids.Add(codeId.ToString());
                 codes.Add(new TrackingCode()
                 {
                     TrackingCodeID = codeId,
                     ProductID = product.ProductID,
                     Code = codeId.ToString(),
+                    Product = product,
+                    SerialNumber = codeDto.SerialNumber,
+                    BatchNumber = codeDto.BatchNumber,
                 });
             }
+
+            await _trackingCodeRepository.AddTrackingCodeBulkAsync(codes);
 
             return new CodeResponseDto()
             {
                 NoProducts = NoProducts,
+                ProductId = product.ProductID,
+                BatchNumber = codeDto.BatchNumber,
+                Codes = guids,
             };
         }
 
 
-        public async Task<bool> SaveCustomCodeAsync(CodeDto codeDto)
+        public async Task<CodeResponseDto> SaveCustomCodeAsync(CodeDto codeDto)
         {
             List<TrackingCode> codes = new List<TrackingCode>();
 
@@ -53,7 +63,7 @@ namespace Inivohacks.BL.BLServices
 
             if (product == null)
             {
-                return false;
+                return null;
             }
 
             foreach (int item in Enumerable.Range(1, codeDto.Codes.Count))
@@ -65,15 +75,34 @@ namespace Inivohacks.BL.BLServices
                     TrackingCodeID = codeId,
                     ProductID = product.ProductID,
                     Code = codeDto.Codes[item],
+                    Product = product,
+                    SerialNumber = codeDto.SerialNumber,
+                    BatchNumber = codeDto.BatchNumber,
                 });
             }
-            return true;
+
+            await _trackingCodeRepository.AddTrackingCodeBulkAsync(codes);
+
+            return new CodeResponseDto()
+            {
+                NoProducts = codeDto.Codes.Count,
+                ProductId = product.ProductID,
+                BatchNumber = codeDto.BatchNumber,
+                Codes = codeDto.Codes,
+            };
         }
 
-        public async Task<bool> UpdateBatchBulk(CodeDto codeDto)
+        public async Task<CodeResponseDto> GetCodesByBatch(int batchNumber,int productId)
         {
+            var Codes = await _trackingCodeRepository.Search(c=>c.BatchNumber == batchNumber && c.ProductID == productId).ToListAsync();
 
-            return true;
+            return new CodeResponseDto()
+            {
+                NoProducts = Codes.Count,
+                BatchNumber = batchNumber,
+                ProductId = productId,
+                Codes = Codes.Select(e=>e.Code.ToString()).ToList(),
+            };
         }
     }
 }

@@ -2,8 +2,8 @@
 {
     public class AddCodeRequestModel
     {
-        public String BatchNumber { get; set; }
-        public String SerialNumber { get; set; }
+        public int BatchNumber { get; set; }
+        public int SerialNumber { get; set; }
         public String Code { get; set; }
 
     }

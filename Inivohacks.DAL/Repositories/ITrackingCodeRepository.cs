@@ -7,5 +7,6 @@ namespace Inivohacks.DAL.Repositories
         public Task<TrackingCode> AddTrackingCodeAsync(TrackingCode trackingCode);
         public Task<TrackingCode> GetTrackingCodeByIdAsync(Guid guid);
         public Task<TrackingCode> UpdateTrackingCodeAsync(TrackingCode trackingCode);
+        public Task<bool> AddTrackingCodeBulkAsync(List<TrackingCode> trackingCodes);
     }
 }

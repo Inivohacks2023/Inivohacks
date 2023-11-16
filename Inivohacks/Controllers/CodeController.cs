@@ -11,23 +11,34 @@ namespace Inivohacks.Controllers
     public class CodeController : Controller
     {
         private readonly ICodeService _codeService;
-        public CodeController(ICodeService codeService)
+
+        public CodeController(ICodeService userService)
         {
-            _codeService = codeService;
+            _codeService = userService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveCodesAsync(AddCodeRequestModel addCodeRequest)
+        [Route("addcodes")]
+        public async Task<ActionResult<CodeResponseDto>> SaveCodesAsync([FromBody] AddCodeRequestModel addCodeRequest)
         {
-            _codeService.SaveCustomCodeAsync(MapperExtentions.ToDto<AddCodeRequestModel,CodeDto>(addCodeRequest));
-            return Ok();
+            var res = await _codeService.SaveCustomCodeAsync(MapperExtentions.ToDto<AddCodeRequestModel, CodeDto>(addCodeRequest));
+            return Ok(res);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GenerateCodesAsync(int NoProducts,AddCodeRequestModel addCodeRequest)
+        [Route("generate")]
+        public async Task<IActionResult> GenerateCodesAsync(int noProducts, AddCodeRequestModel addCodeRequest)
         {
-            _codeService.GenerateCodeAsync(NoProducts, MapperExtentions.ToDto<AddCodeRequestModel, CodeDto>(addCodeRequest));
-            return Ok();
+            var res = await _codeService.GenerateCodeAsync(noProducts, MapperExtentions.ToDto<AddCodeRequestModel, CodeDto>(addCodeRequest));
+            return Ok(res);
+        }
+
+        [HttpGet]
+        [Route("getcodes")]
+        public async Task<IActionResult> GetCodes(int productId, int batchNumber)
+        {
+            var res = await _codeService.GetCodesByBatch(batchNumber, productId);
+            return Ok(res);
         }
     }
 }

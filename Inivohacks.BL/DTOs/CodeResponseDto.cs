@@ -8,10 +8,10 @@ namespace Inivohacks.BL.DTOs
 {
     public class CodeResponseDto
     {
-        public Guid TrackingCode { get; set; }
+        public int ProductId { get; set; }
         public int BatchNumber { get; set; }
         public int NoProducts { get; set; }
 
-        public List<Guid> Codes { get; set; }
+        public List<String> Codes { get; set; }
     }
 }

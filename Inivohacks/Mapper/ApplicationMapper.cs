@@ -11,10 +11,6 @@ namespace Inivohacks.Mapper
         public ApplicationMapper()
         {
             CreateMap<ManufacturerRequestModel, ManufacturerDto>();
-
-            #region Batch
-            CreateMap<BatchRequestModel, BatchDTO>();
-            #endregion
             CreateMap<ManufacturerModel, ManufacturerDto>();
             CreateMap<ManufacturerDto, ManufacturerModel>();
             CreateMap<ProductModel, ProductDto>();

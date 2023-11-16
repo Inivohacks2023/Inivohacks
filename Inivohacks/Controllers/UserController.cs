@@ -1,6 +1,5 @@
 ﻿using Inivohacks.BL.BLServices;
 using Inivohacks.BL.DTOs;
-using Inivohacks.DAL.Models;
 using Inivohacks.Mapper;
 using Inivohacks.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -31,13 +30,15 @@ namespace Inivohacks.Controllers
             {
                 success = await _userService.CreateUserAsync(
                     MapperExtentions.ToDto<UserModel, UserDto>(viewModel));
-                if (success) {
+                if (success)
+                {
                     return Ok();
                 }
                 return BadRequest("Could not create user. Ensure the request contains a valid manufacturerID");
             }
-            catch(Exception e){
-                return BadRequest(string.Format("CreateUser - Could not create user. Error : {0}",e.Message));
+            catch (Exception e)
+            {
+                return BadRequest(string.Format("CreateUser - Could not create user. Error : {0}", e.Message));
             }
         }
 
