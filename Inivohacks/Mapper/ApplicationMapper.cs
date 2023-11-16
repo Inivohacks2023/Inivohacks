@@ -20,6 +20,8 @@ namespace Inivohacks.Mapper
             CreateMap<ProductModel, ProductDto>();
             CreateMap<ProductDto, ProductModel>();
             CreateMap<TrackingCodeDTO, TrackingCode>();
+            CreateMap<UserModel, UserDto>();
+            CreateMap<UserDto, UserModel>();
         }
     }
 

@@ -6,7 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Inivohacks.DAL.Migrations
 {
     /// <inheritdoc />
+<<<<<<<< HEAD:Inivohacks.DAL/Migrations/20231115084750_TEst1.cs
     public partial class TEst1 : Migration
+========
+    public partial class InitalMigration : Migration
+>>>>>>>> main:Inivohacks.DAL/Migrations/20231115181012_InitalMigration.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -125,6 +129,8 @@ namespace Inivohacks.DAL.Migrations
                 {
                     UserID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ManufacturerID = table.Column<int>(type: "int", nullable: false),
@@ -145,7 +151,7 @@ namespace Inivohacks.DAL.Migrations
                 name: "Certificates",
                 columns: table => new
                 {
-                    CertificationID = table.Column<int>(type: "int", nullable: false)
+                    CertificateID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductID = table.Column<int>(type: "int", nullable: false),
                     InUse = table.Column<bool>(type: "bit", nullable: false),
@@ -153,7 +159,7 @@ namespace Inivohacks.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Certificates", x => x.CertificationID);
+                    table.PrimaryKey("PK_Certificates", x => x.CertificateID);
                     table.ForeignKey(
                         name: "FK_Certificates_Products_ProductID",
                         column: x => x.ProductID,
@@ -178,7 +184,7 @@ namespace Inivohacks.DAL.Migrations
                         name: "FK_CertPermissions_Certificates_CertificateID",
                         column: x => x.CertificateID,
                         principalTable: "Certificates",
-                        principalColumn: "CertificationID",
+                        principalColumn: "CertificateID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CertPermissions_Permissions_PermissionID",
@@ -199,13 +205,18 @@ namespace Inivohacks.DAL.Migrations
                     UserID = table.Column<int>(type: "int", nullable: false),
                     InteractionType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InteractionDescription = table.Column<int>(type: "int", nullable: false),
+<<<<<<<< HEAD:Inivohacks.DAL/Migrations/20231115084750_TEst1.cs
                     CertificationID = table.Column<int>(type: "int", nullable: false),
                     CertificateCertificationID = table.Column<int>(type: "int", nullable: true)
+========
+                    CertificateID = table.Column<int>(type: "int", nullable: false)
+>>>>>>>> main:Inivohacks.DAL/Migrations/20231115181012_InitalMigration.cs
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Scans", x => x.ScanID);
                     table.ForeignKey(
+<<<<<<<< HEAD:Inivohacks.DAL/Migrations/20231115084750_TEst1.cs
                         name: "FK_Scans_Certificates_CertificateCertificationID",
                         column: x => x.CertificateCertificationID,
                         principalTable: "Certificates",
@@ -213,15 +224,19 @@ namespace Inivohacks.DAL.Migrations
                     table.ForeignKey(
                         name: "FK_Scans_Certificates_CertificationID",
                         column: x => x.CertificationID,
+========
+                        name: "FK_Scans_Certificates_CertificateID",
+                        column: x => x.CertificateID,
+>>>>>>>> main:Inivohacks.DAL/Migrations/20231115181012_InitalMigration.cs
                         principalTable: "Certificates",
-                        principalColumn: "CertificationID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "CertificateID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Scans_TrackingCodes_TrackingCodeID",
                         column: x => x.TrackingCodeID,
                         principalTable: "TrackingCodes",
                         principalColumn: "TrackingCodeID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Scans_Users_UserID",
                         column: x => x.UserID,
@@ -251,12 +266,16 @@ namespace Inivohacks.DAL.Migrations
                 column: "ManufacturerID");
 
             migrationBuilder.CreateIndex(
+<<<<<<<< HEAD:Inivohacks.DAL/Migrations/20231115084750_TEst1.cs
                 name: "IX_Scans_CertificateCertificationID",
                 table: "Scans",
                 column: "CertificateCertificationID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Scans_CertificationID",
+========
+                name: "IX_Scans_CertificateID",
+>>>>>>>> main:Inivohacks.DAL/Migrations/20231115181012_InitalMigration.cs
                 table: "Scans",
                 column: "CertificationID");
 
@@ -271,6 +290,14 @@ namespace Inivohacks.DAL.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
+<<<<<<<< HEAD:Inivohacks.DAL/Migrations/20231115084750_TEst1.cs
+========
+                name: "IX_TrackingCodes_ProductID",
+                table: "TrackingCodes",
+                column: "ProductID");
+
+            migrationBuilder.CreateIndex(
+>>>>>>>> main:Inivohacks.DAL/Migrations/20231115181012_InitalMigration.cs
                 name: "IX_Users_ManufacturerID",
                 table: "Users",
                 column: "ManufacturerID");

@@ -9,6 +9,7 @@ namespace Inivohacks.BL.BLServices
 {
     public interface IUserService
     {
-        public Task<bool> CreateUserAsyncAsync(UserDto user);
+        public Task<bool> CreateUserAsync(UserDto user);
+        Task<UserDto> GetUserByIDAsync(int userID);
     }
 }

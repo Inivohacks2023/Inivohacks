@@ -8,7 +8,7 @@ namespace Inivohacks.DAL.Models
        
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CertificationID { get; set; }
+        public int CertificateID { get; set; }
         public int ProductID { get; set; }
         public bool InUse { get; set; }
         public DateTime ExpiryDate { get; set; }
