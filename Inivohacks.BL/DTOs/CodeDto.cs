@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inivohacks.DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,12 @@ namespace Inivohacks.BL.DTOs
 {
     public class CodeDto
     {
-        public String BatchNumber { get; set; }
-        public String SerialNumber { get; set; }
-        public String Code { get; set; }
+        public int BatchNumber { get; set; }
+        public int SerialNumber { get; set; }
+        public List<String> Codes { get; set; }
+        public int ProductId { get; set; }
+        public string Status { get; set; }
+        public string Notes { get; set; }
+        public bool RecallStatus { get; set; }
     }
 }

@@ -4,7 +4,7 @@ namespace Inivohacks.BL.BLServices
 {
     public interface ICodeService
     {
-        CodeResponseDto GenerateCodeAsync(int NoProducts,int ProductId);
-        void SaveCustomCodeAsync(CodeDto codeDto);
+        Task<CodeResponseDto> GenerateCodeAsync(int NoProducts, CodeDto codeDto);
+        Task<bool> SaveCustomCodeAsync(CodeDto codeDto);
     }
 }

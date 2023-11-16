@@ -24,9 +24,9 @@ namespace Inivohacks.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GenerateCodesAsync(int NoProducts,int ProductId)
+        public async Task<IActionResult> GenerateCodesAsync(int NoProducts,AddCodeRequestModel addCodeRequest)
         {
-            _codeService.GenerateCodeAsync(NoProducts,ProductId);
+            _codeService.GenerateCodeAsync(NoProducts, MapperExtentions.ToDto<AddCodeRequestModel, CodeDto>(addCodeRequest));
             return Ok();
         }
     }

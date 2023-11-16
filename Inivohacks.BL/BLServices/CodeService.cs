@@ -1,42 +1,79 @@
 ﻿using Inivohacks.BL.DTOs;
 using Inivohacks.DAL.Models;
 using Inivohacks.DAL.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection.Metadata;
 
 namespace Inivohacks.BL.BLServices
 {
     public class CodeService : ICodeService
     {
         private readonly ITrackingCodeRepository _trackingCodeRepository;
-        public CodeService(ITrackingCodeRepository trackingCodeRepository)
+        private readonly IProductRepository _productRepository;
+        public CodeService(ITrackingCodeRepository trackingCodeRepository, IProductRepository productRepository)
         {
             _trackingCodeRepository = trackingCodeRepository;
+            _productRepository = productRepository;
         }
 
-        public CodeResponseDto GenerateCodeAsync(int NoProducts, int ProductId)
+        public async Task<CodeResponseDto> GenerateCodeAsync(int NoProducts,CodeDto codeDto)
         {
-            TrackingCode code = new TrackingCode();
-            List<Guid> Codes = new List<Guid>();
-            foreach(int item in Enumerable.Range(1, NoProducts))
+            List<TrackingCode> codes = new List<TrackingCode>();
+            
+            Product product = await _productRepository.GetProductbyProductIdAsync(codeDto.ProductId);
+            
+            if (product == null)
             {
-                Codes.Add(new Guid(BitConverter.GetBytes(item)));
+                return null;
             }
+
+            foreach (int item in Enumerable.Range(1, NoProducts))
+            {
+                Guid codeId = new Guid(item, (short)codeDto.BatchNumber,(short)product.ProductID,new byte[] { 1,2,3,4,5,6,7,8});
+                
+                codes.Add(new TrackingCode()
+                {
+                    TrackingCodeID = codeId,
+                    ProductID = product.ProductID,
+                    Code = codeId.ToString(),
+                });
+            }
+
             return new CodeResponseDto()
             {
                 NoProducts = NoProducts,
-                BatchNumber = code.BatchNumber,
-                Codes = Codes
             };
         }
 
 
-        public void SaveCustomCodeAsync(CodeDto codeDto)
+        public async Task<bool> SaveCustomCodeAsync(CodeDto codeDto)
         {
-            throw new NotImplementedException();
+            List<TrackingCode> codes = new List<TrackingCode>();
+
+            Product product = await _productRepository.GetProductbyProductIdAsync(codeDto.ProductId);
+
+            if (product == null)
+            {
+                return false;
+            }
+
+            foreach (int item in Enumerable.Range(1, codeDto.Codes.Count))
+            {
+                Guid codeId = new Guid(item, (short)codeDto.BatchNumber, (short)product.ProductID, new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 });
+
+                codes.Add(new TrackingCode()
+                {
+                    TrackingCodeID = codeId,
+                    ProductID = product.ProductID,
+                    Code = codeDto.Codes[item],
+                });
+            }
+            return true;
+        }
+
+        public async Task<bool> UpdateBatchBulk(CodeDto codeDto)
+        {
+
+            return true;
         }
     }
 }
