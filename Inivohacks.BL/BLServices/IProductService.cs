@@ -11,5 +11,7 @@ namespace Inivohacks.BL.BLServices
     {
         public Task<bool> CreateProductAsync(ProductDto product);
         public Task<ProductDto> GetProductByIDAsync(int productIdString);
+
+        public IAsyncEnumerable<ProductDto> GetAllProductsAsync();
     }
 }

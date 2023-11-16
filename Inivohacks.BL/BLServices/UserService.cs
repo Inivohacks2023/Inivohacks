@@ -18,7 +18,7 @@ namespace Inivohacks.BL.BLServices
         {
             this.userRepository = userRepository;
         }
-        public async Task<bool> CreateUserAsyncAsync(UserDto user)
+        public async Task<bool> CreateUserAsync(UserDto user)
         {
             bool status = false;
             if (user == null)
@@ -35,6 +35,22 @@ namespace Inivohacks.BL.BLServices
                 status = false;
             }
             return status;
+        }
+
+        public async Task<UserDto> GetUserByIDAsync(int userID)
+        {
+            if (userID == 0)
+            {
+                throw new ArgumentNullException(nameof(userID));
+            }
+
+            User user = await userRepository.GetUsebyUserIdAsync(userID);
+            if (user == null)
+            {
+                return null;
+            }
+
+            return user.TransformDALtoAPI();
         }
     }
 }

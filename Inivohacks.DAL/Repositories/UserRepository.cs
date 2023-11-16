@@ -22,5 +22,10 @@ namespace Inivohacks.DAL.Repositories
             await AddAsync(user);
             return true;
         }
+
+        public async Task<User> GetUsebyUserIdAsync(int userId)
+        {
+            return Search(a => a.UserID == userId).FirstOrDefault();
+        }
     }
 }

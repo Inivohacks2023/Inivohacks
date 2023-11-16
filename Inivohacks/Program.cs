@@ -12,6 +12,8 @@ builder.Services.AddScoped<IManufactureService, ManufactureService>();
 builder.Services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

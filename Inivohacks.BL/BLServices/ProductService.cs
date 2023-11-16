@@ -2,12 +2,6 @@
 using Inivohacks.BL.Helper;
 using Inivohacks.DAL.Models;
 using Inivohacks.DAL.Repositories;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Inivohacks.BL.BLServices
 {
@@ -28,7 +22,7 @@ namespace Inivohacks.BL.BLServices
             }
             try
             {
-                productRepository.AddProductAsync(product.TransformAPItoDAL());
+                await productRepository.AddProductAsync(product.TransformAPItoDAL());
                 status = true;
             }
             catch
@@ -36,6 +30,17 @@ namespace Inivohacks.BL.BLServices
                 status = false;
             }
             return status;
+        }
+
+        public async IAsyncEnumerable<ProductDto> GetAllProductsAsync()
+        {
+            IAsyncEnumerable<Product> ProductList = productRepository.GetAllProductAsync();
+
+
+            await foreach (var prod in ProductList)
+            {
+                yield return prod.TransformDALtoAPI();
+            }
         }
 
         public async Task<ProductDto> GetProductByIDAsync(int productId)
