@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserDetailsService } from '../services/user-details.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
     
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userDetailsService: UserDetailsService) { }
 
   ngOnInit(): void {
   }
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
   togglePanel() {
     this.isSignUp = !this.isSignUp;
   }
-  navigateToQRScan() {
-    this.router.navigate(['/supplier-scan']);
+  loginAsCustomer() {
+    this.router.navigate(['/qr-scan']);
+    this.userDetailsService.setCustomerStatus(true);
   }
 }

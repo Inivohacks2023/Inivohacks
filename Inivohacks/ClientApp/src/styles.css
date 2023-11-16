@@ -10,3 +10,7 @@ body {
   font-size: 14px;
   font-style: normal;
 }
+
+.fa-classic, .fa-regular, .fa-solid, .far, .fas {
+  font-family: "Font Awesome 6 Free" !important;
+}

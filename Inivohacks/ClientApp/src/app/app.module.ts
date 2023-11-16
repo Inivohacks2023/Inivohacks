@@ -20,12 +20,16 @@ import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { QrScanComponent } from './qr-scan/qr-scan.component';
+import { UserMenuComponent } from './user-menu/user-menu.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    QrScanComponent
+    QrScanComponent,
+    UserMenuComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,7 +38,7 @@ import { QrScanComponent } from './qr-scan/qr-scan.component';
     NgxScannerQrcodeModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent , pathMatch: 'full' },
-      { path: 'supplier-scan', component: QrScanComponent },
+      { path: 'qr-scan', component: QrScanComponent },
     ]),
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
