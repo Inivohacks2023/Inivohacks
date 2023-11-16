@@ -6,53 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Inivohacks.DAL.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:Inivohacks.DAL/Migrations/20231115084750_TEst1.cs
-    public partial class TEst1 : Migration
-========
     public partial class InitalMigration : Migration
->>>>>>>> main:Inivohacks.DAL/Migrations/20231115181012_InitalMigration.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Batch",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    ManufacturedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OriginalBatchid = table.Column<int>(type: "int", nullable: true),
-                    Qty = table.Column<int>(type: "int", nullable: false),
-                    LocationId = table.Column<int>(type: "int", nullable: false),
-                    LocationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Batch", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BatchItem",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BatchId = table.Column<int>(type: "int", nullable: false),
-                    Qty = table.Column<int>(type: "int", nullable: false),
-                    LocationId = table.Column<int>(type: "int", nullable: false),
-                    LocationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BatchItem", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Manufacturers",
                 columns: table => new
@@ -81,24 +39,6 @@ namespace Inivohacks.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Permissions", x => x.PermissionId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TrackingCodes",
-                columns: table => new
-                {
-                    TrackingCodeID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BatchNumber = table.Column<int>(type: "int", nullable: false),
-                    SerialNumber = table.Column<int>(type: "int", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RecallStatus = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TrackingCodes", x => x.TrackingCodeID);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,6 +109,30 @@ namespace Inivohacks.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TrackingCodes",
+                columns: table => new
+                {
+                    TrackingCodeID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductID = table.Column<int>(type: "int", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BatchNumber = table.Column<int>(type: "int", nullable: false),
+                    SerialNumber = table.Column<int>(type: "int", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RecallStatus = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TrackingCodes", x => x.TrackingCodeID);
+                    table.ForeignKey(
+                        name: "FK_TrackingCodes_Products_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Products",
+                        principalColumn: "ProductID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CertPermissions",
                 columns: table => new
                 {
@@ -205,29 +169,14 @@ namespace Inivohacks.DAL.Migrations
                     UserID = table.Column<int>(type: "int", nullable: false),
                     InteractionType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InteractionDescription = table.Column<int>(type: "int", nullable: false),
-<<<<<<<< HEAD:Inivohacks.DAL/Migrations/20231115084750_TEst1.cs
-                    CertificationID = table.Column<int>(type: "int", nullable: false),
-                    CertificateCertificationID = table.Column<int>(type: "int", nullable: true)
-========
                     CertificateID = table.Column<int>(type: "int", nullable: false)
->>>>>>>> main:Inivohacks.DAL/Migrations/20231115181012_InitalMigration.cs
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Scans", x => x.ScanID);
                     table.ForeignKey(
-<<<<<<<< HEAD:Inivohacks.DAL/Migrations/20231115084750_TEst1.cs
-                        name: "FK_Scans_Certificates_CertificateCertificationID",
-                        column: x => x.CertificateCertificationID,
-                        principalTable: "Certificates",
-                        principalColumn: "CertificationID");
-                    table.ForeignKey(
-                        name: "FK_Scans_Certificates_CertificationID",
-                        column: x => x.CertificationID,
-========
                         name: "FK_Scans_Certificates_CertificateID",
                         column: x => x.CertificateID,
->>>>>>>> main:Inivohacks.DAL/Migrations/20231115181012_InitalMigration.cs
                         principalTable: "Certificates",
                         principalColumn: "CertificateID",
                         onDelete: ReferentialAction.Cascade);
@@ -266,18 +215,9 @@ namespace Inivohacks.DAL.Migrations
                 column: "ManufacturerID");
 
             migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:Inivohacks.DAL/Migrations/20231115084750_TEst1.cs
-                name: "IX_Scans_CertificateCertificationID",
-                table: "Scans",
-                column: "CertificateCertificationID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Scans_CertificationID",
-========
                 name: "IX_Scans_CertificateID",
->>>>>>>> main:Inivohacks.DAL/Migrations/20231115181012_InitalMigration.cs
                 table: "Scans",
-                column: "CertificationID");
+                column: "CertificateID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Scans_TrackingCodeID",
@@ -290,14 +230,11 @@ namespace Inivohacks.DAL.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:Inivohacks.DAL/Migrations/20231115084750_TEst1.cs
-========
                 name: "IX_TrackingCodes_ProductID",
                 table: "TrackingCodes",
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
->>>>>>>> main:Inivohacks.DAL/Migrations/20231115181012_InitalMigration.cs
                 name: "IX_Users_ManufacturerID",
                 table: "Users",
                 column: "ManufacturerID");
@@ -306,12 +243,6 @@ namespace Inivohacks.DAL.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Batch");
-
-            migrationBuilder.DropTable(
-                name: "BatchItem");
-
             migrationBuilder.DropTable(
                 name: "CertPermissions");
 

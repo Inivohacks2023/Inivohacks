@@ -35,7 +35,7 @@ namespace Inivohacks.BL.BLServices
                 TrackingCodeID = guId,
                 InteractionType = "Scan",
                 InteractionDescription = 1,
-                CertificationID = 8,
+                CertificateID = 8,
                 UserID = 3,
             });
 
@@ -68,7 +68,6 @@ namespace Inivohacks.BL.BLServices
             TrackingCode rebrandedTrackingCode = new()
             {
                 ProductID = rebrandData.ProductId,
-                PreviousTrackingCodeId = rebrandData.CurrentTrackingCodeID
 
             };
 
@@ -80,7 +79,7 @@ namespace Inivohacks.BL.BLServices
                 TrackingCodeID = rebrandedTrackingCode.TrackingCodeID,
                 InteractionType = "Rebrand",
                 InteractionDescription = 1,
-                CertificationID = rebrandData.CertificateId,
+                CertificateID = rebrandData.CertificateId,
                 UserID = 3,
             });
 
@@ -120,7 +119,7 @@ namespace Inivohacks.BL.BLServices
                 TrackingCodeID = transferBatchDTO.TrackingCode,
                 InteractionType = "TransferAccepted",
                 InteractionDescription = 1,
-                CertificationID = transferBatchDTO.CertificateId,
+                CertificateID = transferBatchDTO.CertificateId,
                 UserID = 3,
                 Latitude= transferBatchDTO.Latitude,
                 Longitude= transferBatchDTO.Longitude,
