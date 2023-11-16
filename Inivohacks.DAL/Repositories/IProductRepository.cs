@@ -6,5 +6,6 @@ namespace Inivohacks.DAL.Repositories
     {
         public Task<bool> AddProductAsync(Product product);
         public Task<Product> GetProductbyProductIdAsync(int productId);
+        public IAsyncEnumerable<Product> GetAllProductAsync();
     }
 }
