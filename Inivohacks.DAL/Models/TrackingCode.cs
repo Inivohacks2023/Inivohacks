@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Inivohacks.DAL.Models
@@ -19,14 +20,11 @@ namespace Inivohacks.DAL.Models
 
         public string Notes { get; set; } = "";
 
-        public Guid? PreviousTrackingCodeId { get; set; }
-
         public bool RecallStatus { get; set; } = false;
         public Product Product { get; set; }
         public DateTime TrackingCodeCreatedTimeStamp { get; set; } = DateTime.Now;
-        /*
-        public virtual Product product { get; set; }
-        public ICollection <Scan> Scans { get; set; }*/
+        public ICollection<Scan> Scans { get; set; }
+       
 
     }
 }
