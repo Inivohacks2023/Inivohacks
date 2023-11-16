@@ -31,8 +31,8 @@ import { SupplierScanComponent } from './supplier-scan/supplier-scan.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: SupplierScanComponent, pathMatch: 'full' },
-      { path: 'supplier-scan', component: LoginComponent },
+      { path: '', component: LoginComponent , pathMatch: 'full' },
+      { path: 'supplier-scan', component:  SupplierScanComponent },
     ]),
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
