@@ -19,10 +19,6 @@ namespace Inivohacks.DAL.Repositories
             return true;
         }
 
-        //public IAsyncEnumerable<Manufacturer> GetAllManufacturerAsync()
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public async IAsyncEnumerable<Manufacturer> GetAllManufacturerAsync()
         {

@@ -31,7 +31,7 @@ namespace Inivohacks.Controllers
             return Ok();
         }
         [HttpGet]
-        public async Task<ActionResult<ProductModel>> RecentCVDAssesemnet()
+        public async Task<ActionResult<ProductModel>> ProductDetailsbyID()
         {
             int productID = 0;
             if (Request.Headers.TryGetValue("productId", out var productId))
@@ -45,6 +45,26 @@ namespace Inivohacks.Controllers
             }
 
             return Ok(MapperExtentions.ToViewModel<ProductDto, ProductModel>(productItem));
+
+        }
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<ActionResult<ProductModel>> ProductList()
+        {
+
+            List<ProductModel> productListmodel = new List<ProductModel>();
+
+            IAsyncEnumerable<ProductDto> productList = _productService.GetAllProductsAsync();
+            if (productList == null)
+            {
+                return NotFound();
+            }
+            await foreach (var prod in productList)
+            {
+                productListmodel.Add(MapperExtentions.ToViewModel<ProductDto, ProductModel>(prod));
+            }
+
+            return Ok(productListmodel);
 
         }
     }

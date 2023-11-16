@@ -26,5 +26,12 @@ namespace Inivohacks.DAL.Repositories
         {
             return Search(a => a.ProductID == productId).FirstOrDefault();
         }
+        public async IAsyncEnumerable<Product> GetAllProductAsync()
+        {
+            foreach (var plist in _dbContext.Products.ToList())
+            {
+                yield return plist;
+            }
+        }
     }
 }
