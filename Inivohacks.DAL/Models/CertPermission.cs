@@ -11,7 +11,6 @@ namespace Inivohacks.DAL.Models
         public int CertPermissionID { get; set; }
         public int CertificateID { get; set; }
         public int PermissionID { get; set; }
-
         public virtual Certificate Certificate { get; set; }
         public virtual Permission Permission { get; set; }
     }

@@ -15,7 +15,8 @@ namespace Inivohacks.Mapper
             CreateMap<ManufacturerDto, ManufacturerModel>();
             CreateMap<ProductModel, ProductDto>();
             CreateMap<ProductDto, ProductModel>();
-            CreateMap<AddCodeRequestModel, CodeDto>();
+            CreateMap<AddCodesRequestModel, CodeDto>();
+            CreateMap<GenerateCodesRequestModel, CodeDto>();
             CreateMap<TrackingCodeDTO, TrackingCode>();
             CreateMap<UserModel, UserDto>();
             CreateMap<UserDto, UserModel>();

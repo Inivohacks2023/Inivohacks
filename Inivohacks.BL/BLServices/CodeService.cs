@@ -2,8 +2,6 @@
 using Inivohacks.DAL.Models;
 using Inivohacks.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Reflection.Metadata;
 
 namespace Inivohacks.BL.BLServices
 {
@@ -24,6 +22,11 @@ namespace Inivohacks.BL.BLServices
             Product product = await _productRepository.GetProductbyProductIdAsync(codeDto.ProductId);
             
             if (product == null)
+            {
+                return null;
+            }
+
+            if (await ValidateProductBatchId(codeDto.ProductId, codeDto.BatchNumber))
             {
                 return null;
             }
@@ -66,6 +69,11 @@ namespace Inivohacks.BL.BLServices
                 return null;
             }
 
+            if (await ValidateProductBatchId(codeDto.ProductId,codeDto.BatchNumber))
+            {
+                return null;
+            }
+
             foreach (int item in Enumerable.Range(1, codeDto.Codes.Count))
             {
                 Guid codeId = new Guid(item, (short)codeDto.BatchNumber, (short)product.ProductID, new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 });
@@ -74,7 +82,7 @@ namespace Inivohacks.BL.BLServices
                 {
                     TrackingCodeID = codeId,
                     ProductID = product.ProductID,
-                    Code = codeDto.Codes[item],
+                    Code = codeDto.Codes[item-1],
                     Product = product,
                     SerialNumber = codeDto.SerialNumber,
                     BatchNumber = codeDto.BatchNumber,
@@ -103,6 +111,12 @@ namespace Inivohacks.BL.BLServices
                 ProductId = productId,
                 Codes = Codes.Select(e=>e.Code.ToString()).ToList(),
             };
+        }
+
+        public async Task<bool> ValidateProductBatchId(int productId, int batchNo)
+        {
+            var trackingCodes = await _trackingCodeRepository.Search(e=>e.ProductID == productId && e.BatchNumber==batchNo).ToListAsync();
+            return trackingCodes.Count > 0;
         }
     }
 }

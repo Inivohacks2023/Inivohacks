@@ -19,17 +19,37 @@ namespace Inivohacks.Controllers
 
         [HttpPost]
         [Route("addcodes")]
-        public async Task<ActionResult<CodeResponseDto>> SaveCodesAsync([FromBody] AddCodeRequestModel addCodeRequest)
+        public async Task<ActionResult<CodeResponseDto>> SaveCodesAsync([FromBody] AddCodesRequestModel addCodeRequest)
         {
-            var res = await _codeService.SaveCustomCodeAsync(MapperExtentions.ToDto<AddCodeRequestModel, CodeDto>(addCodeRequest));
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var res = await _codeService.SaveCustomCodeAsync(MapperExtentions.ToDto<AddCodesRequestModel, CodeDto>(addCodeRequest));
+            
+            if (res == null)
+            {
+                return BadRequest();
+            }
+
             return Ok(res);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("generate")]
-        public async Task<IActionResult> GenerateCodesAsync(int noProducts, AddCodeRequestModel addCodeRequest)
+        public async Task<IActionResult> GenerateCodesAsync(int noProducts, GenerateCodesRequestModel generateCodesRequest)
         {
-            var res = await _codeService.GenerateCodeAsync(noProducts, MapperExtentions.ToDto<AddCodeRequestModel, CodeDto>(addCodeRequest));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var res = await _codeService.GenerateCodeAsync(noProducts, MapperExtentions.ToDto<GenerateCodesRequestModel, CodeDto>(generateCodesRequest));
+            
+            if (res == null)
+            {
+                return BadRequest();
+            }
             return Ok(res);
         }
 
@@ -38,6 +58,10 @@ namespace Inivohacks.Controllers
         public async Task<IActionResult> GetCodes(int productId, int batchNumber)
         {
             var res = await _codeService.GetCodesByBatch(batchNumber, productId);
+            if (res == null)
+            {
+                return BadRequest();
+            }
             return Ok(res);
         }
     }
