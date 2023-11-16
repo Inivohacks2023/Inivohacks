@@ -28,8 +28,12 @@
           <p class="text-[20px] font-medium">Or Scan the QR</p>
         </div>
       </div>
-      <button class="w-full mb-10" nbButton hero status="info">Scan QR</button>
-      <img src="../../assets/images/sample-QR.png" alt="Sample QR" />
+      <button class="w-full mb-10" nbButton hero status="info" (click)="scanQR()">Scan QR</button>
+      <div id="qr-container" class="w-[330px]">
+        <img src="../../assets/images/sample-QR.png" alt="Sample QR" *ngIf="!isCameraVisible"/>
+        <ngx-scanner-qrcode #action="scanner" *ngIf="isCameraVisible" (event)="handleQrCodeResult($event)"></ngx-scanner-qrcode>
+      </div>
+      
     </div>
   </div>
   <div class="col-span-3"></div>

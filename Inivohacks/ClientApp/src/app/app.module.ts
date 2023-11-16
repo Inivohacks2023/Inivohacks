@@ -15,24 +15,26 @@ import {
   NbUserModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { SupplierScanComponent } from './supplier-scan/supplier-scan.component';
+import { QrScanComponent } from './qr-scan/qr-scan.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SupplierScanComponent
+    QrScanComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    NgxScannerQrcodeModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent , pathMatch: 'full' },
-      { path: 'supplier-scan', component:  SupplierScanComponent },
+      { path: 'supplier-scan', component: QrScanComponent },
     ]),
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
