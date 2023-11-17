@@ -6,19 +6,17 @@ using Inivohacks.ViewModels;
 
 namespace Inivohacks.Mapper
 {
-    public class ApplicationMapper :  Profile
+    public class ApplicationMapper : Profile
     {
-        public ApplicationMapper() 
+        public ApplicationMapper()
         {
             CreateMap<ManufacturerRequestModel, ManufacturerDto>();
-
-            #region Batch
-            CreateMap<BatchRequestModel, BatchDTO>();
-            #endregion
             CreateMap<ManufacturerModel, ManufacturerDto>();
             CreateMap<ManufacturerDto, ManufacturerModel>();
             CreateMap<ProductModel, ProductDto>();
             CreateMap<ProductDto, ProductModel>();
+            CreateMap<AddCodesRequestModel, CodeDto>();
+            CreateMap<GenerateCodesRequestModel, CodeDto>();
             CreateMap<TrackingCodeDTO, TrackingCode>();
             CreateMap<UserModel, UserDto>();
             CreateMap<UserDto, UserModel>();

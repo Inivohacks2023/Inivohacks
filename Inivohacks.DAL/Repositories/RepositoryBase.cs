@@ -1,5 +1,5 @@
 ﻿using Inivohacks.DAL.DataContext;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Linq.Expressions;
 
 namespace Inivohacks.DAL.Repositories
@@ -17,7 +17,7 @@ namespace Inivohacks.DAL.Repositories
             await _dbContext.AddAsync(entity);
             _dbContext.SaveChanges();
             return entity;
-        
+
         }
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
@@ -38,7 +38,24 @@ namespace Inivohacks.DAL.Repositories
             return _dbContext.Set<TEntity>().Where(predicate);
         }
 
-
+        public async Task<bool> AddBulkAsync(List<TEntity> entities)
+        {
+            using (IDbContextTransaction transaction = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    await _dbContext.AddRangeAsync(entities);
+                    _dbContext.SaveChanges();
+                    await transaction.CommitAsync();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    return false;
+                }
+            }
+        }
 
     }
 }

@@ -19,18 +19,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "apita.lk", 
+            ValidIssuer = "apita.lk",
             ValidAudience = "apita.lk",
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("!N!V0SHacks@2023")) //Secret Signing Key
         };
     });
-
+builder.Services.AddControllers();
 builder.Services.AddScoped<IManufactureService, ManufactureService>();
 builder.Services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
+builder.Services.AddScoped<ICodeService, CodeService>();
+builder.Services.AddScoped<ITrackingCodeRepository, TrackingCodeRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IBatchService, BatchService>();
-builder.Services.AddScoped<IBatchRepository, BatchRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IScanService, ScanService>();
@@ -50,7 +50,7 @@ builder.Services.AddSwaggerGen(options =>
         Description = "API for Hackathon App"
     });
 
-    });
+});
 
 var app = builder.Build();
 
@@ -72,6 +72,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
-app.MapFallbackToFile("index.html"); ;
+app.MapFallbackToFile("index.html");
 
 app.Run();
