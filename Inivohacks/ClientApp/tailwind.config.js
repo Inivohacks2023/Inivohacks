@@ -16,7 +16,7 @@ module.exports = {
         'lg': '10px',
       },
       boxShadow: {
-        'login': '0px 4px 4px 0px rgba(0, 0, 0, 0.25);',
+        'login': '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
       },
       backgroundImage: {
         'login-bg': "url('./assets/images/bg-login.png')",
