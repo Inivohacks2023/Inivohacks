@@ -8,6 +8,7 @@ namespace Inivohacks.BL.DTOs.Models
 {
     public class RecallDTO
     {
+        public Guid TrackingCode { get; set; }
         public int BatchId { get; set; }
         public int CertificateId { get; set; }
         public string Latitude { get; set; }

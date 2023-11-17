@@ -17,7 +17,7 @@ namespace Inivohacks.DAL.Models
         public string InteractionType { get; set; }
         public string InteractionDescription { get; set; }
         public int CertificateID { get; set; }
-        public DateTime TimeStamp { get; set; }
+        public DateTime TimeStamp { get; set; }=DateTime.Now;
         
 
 		public virtual User User { get; set; }

@@ -17,12 +17,12 @@ namespace Inivohacks.Controllers
             _iscanService = iscanService;
 
         }
-        [HttpGet("ScanForDetails/{TrackingCodeID}")]
-        public async Task<ActionResult<ScannedItemInfomationModel>> GetBatchById(Guid TrackingCodeID)
+        [HttpGet("ScanForDetails")]
+        public async Task<ActionResult<ScannedItemInfomationModel>> GetBatchById(Guid TrackingCodeID,int? CertificateId,int? UserId,string?Latitude,string ?Longitude, string? Location)
         {
             try
             {
-                var result = await _iscanService.GetItemInformation(TrackingCodeID);
+                var result = await _iscanService.GetItemInformation(TrackingCodeID, CertificateId, UserId,Latitude,Longitude,Location);
                 if (result != null)
                 {
                     return Json(result);
@@ -95,7 +95,7 @@ namespace Inivohacks.Controllers
             try
             {
 
-                var result = await _iscanService.TransferItem(transferBatchDTO);
+                var result = await _iscanService.RequestTransfer(transferBatchDTO);
                 return Ok(result);
             }
             catch (Exception e)
@@ -111,7 +111,7 @@ namespace Inivohacks.Controllers
             try
             {
 
-                var result = await _iscanService.TransferItem(transferBatchDTO);
+                var result = await _iscanService.AcceptTransfer(transferBatchDTO);
                 return Ok(result);
             }
             catch (Exception e)

@@ -10,12 +10,13 @@ namespace Inivohacks.BL.BLServices
 {
     public interface IScanService
     {
-        public Task<ScannedItemInfomationModel?> GetItemInformation(Guid guId);
+        public Task<ScannedItemInfomationModel?> GetItemInformation(Guid guId, int? CertificateId, int? UserId, string? Latitude, string? Longitude, string? Location);
         public  Task<TrackingCode> Add(TrackingCode tr);
 
         public Task<Guid> Rebrand(RebrandTrackerCodeDTO rebrandData);
 
         public Task<string> Recall(RecallDTO model);
-        public Task<string> TransferItem(TransferBatchDTO transferBatchDTO);
+        public Task<string> RequestTransfer(TransferBatchDTO transferBatchDTO);
+        public Task<string> AcceptTransfer(TransferBatchDTO transferBatchDTO);
     }
 }
