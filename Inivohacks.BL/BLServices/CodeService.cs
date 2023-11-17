@@ -43,6 +43,8 @@ namespace Inivohacks.BL.BLServices
                     Product = product,
                     SerialNumber = codeDto.SerialNumber,
                     BatchNumber = codeDto.BatchNumber,
+                    ManufacturedDate = codeDto.ManufacturedDate,
+                    ExpiredDate = codeDto.ExpiredDate,
                 });
             }
 
@@ -86,6 +88,8 @@ namespace Inivohacks.BL.BLServices
                     Product = product,
                     SerialNumber = codeDto.SerialNumber,
                     BatchNumber = codeDto.BatchNumber,
+                    ManufacturedDate=codeDto.ManufacturedDate,
+                    ExpiredDate=codeDto.ExpiredDate,
                 });
             }
 

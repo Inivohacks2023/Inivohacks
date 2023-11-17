@@ -19,10 +19,14 @@ namespace Inivohacks.DAL.Models
         public int SerialNumber { get; set; }
 
         public string Notes { get; set; } = "";
+        public DateTime ManufacturedDate { get; set; }
+        public DateTime ExpiredDate { get; set; }
 
         public bool RecallStatus { get; set; } = false;
-        public Product Product { get; set; }
         public DateTime TrackingCodeCreatedTimeStamp { get; set; } = DateTime.Now;
+        
+        public Product Product { get; set; }
+        
         public ICollection<Scan> Scans { get; set; }
        
 
