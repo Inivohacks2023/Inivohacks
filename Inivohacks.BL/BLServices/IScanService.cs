@@ -15,7 +15,7 @@ namespace Inivohacks.BL.BLServices
 
         public Task<Guid> Rebrand(RebrandTrackerCodeDTO rebrandData);
 
-        public Task<string> Recall(Guid guId);
+        public Task<string> Recall(RecallDTO model);
         public Task<string> TransferItem(TransferBatchDTO transferBatchDTO);
     }
 }

@@ -74,12 +74,12 @@ namespace Inivohacks.Controllers
         }
 
         [HttpPut("Recall")]
-        public async Task<ActionResult<string>> Recall(Guid guId)
+        public async Task<ActionResult<string>> Recall(RecallDTO model)
         {
             try
             {
 
-                var result = await _iscanService.Recall(guId);
+                var result = await _iscanService.Recall(model);
                 return Ok(result);
             }
             catch (Exception e)
