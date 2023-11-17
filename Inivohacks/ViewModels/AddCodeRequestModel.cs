@@ -7,6 +7,8 @@
         public int SerialNumber { get; set; }
         public List<String> Codes { get; set; }
         public string Notes { get; set; }
+        public DateTime ManufacturedDate { get; set; }
+        public DateTime ExpiredDate { get; set; }
 
     }
 }

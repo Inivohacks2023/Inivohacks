@@ -7,5 +7,7 @@
         public int SerialNumber { get; set; }
         public int NoProducts { get; set; }
         public string Notes { get; set; }
+        public DateTime ManufacturedDate { get; set; }
+        public DateTime ExpiredDate { get; set; }
     }
 }
