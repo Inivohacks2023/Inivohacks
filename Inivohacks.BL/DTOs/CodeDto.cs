@@ -9,5 +9,7 @@
         public string Status { get; set; }
         public string Notes { get; set; }
         public bool RecallStatus { get; set; }
+        public DateTime ManufacturedDate { get; set; }
+        public DateTime ExpiredDate { get; set; }
     }
 }

@@ -15,8 +15,9 @@ namespace Inivohacks.DAL.Models
         public Guid TrackingCodeID { get; set; }
         public int UserID { get; set; }
         public string InteractionType { get; set; }
-        public int InteractionDescription { get; set; }
+        public string InteractionDescription { get; set; }
         public int CertificateID { get; set; }
+        public DateTime TimeStamp { get; set; }
         
 
 		public virtual User User { get; set; }
