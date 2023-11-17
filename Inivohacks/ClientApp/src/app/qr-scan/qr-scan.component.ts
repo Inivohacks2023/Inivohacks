@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
+import { SharedDetailsService } from '../services/shared-details.service';
 
 @Component({
   selector: 'app-qr-scan',
@@ -8,6 +10,8 @@ import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
   styleUrls: ['./qr-scan.component.css']
 })
 export class QrScanComponent {
+
+  constructor(private router: Router, private sharedDetailsService: SharedDetailsService) { }
   
   @ViewChild('action') action: NgxScannerQrcodeComponent | undefined;
 
@@ -31,15 +35,23 @@ export class QrScanComponent {
   }
 
   handleQrCodeResult(result: any) {
-    if (!this.hasProcessedQr) {
-      this.qrDetails = result; // Store QR code details
+    if (!this.hasProcessedQr && (result != null || typeof result !== 'undefined')) {
+      this.qrDetails = result;
       console.log('QR Code Details:', this.qrDetails);
-      this.hasProcessedQr = true; // Set the flag to true to prevent further processing
-      this.isCameraVisible = false; // Hide the camera view
+      this.hasProcessedQr = true; 
+      this.isCameraVisible = false;
       if (!this.isCameraVisible && this.action) {
         this.action.stop();
       }
+      this.sharedDetailsService.setQRStatus(true);
+      this.sharedDetailsService.setQrDetails(JSON.stringify(this.qrDetails));
+      this.viewQRDetails();
     }
     this.hasProcessedQr = false;
+  }
+
+  viewQRDetails() {
+    this.router.navigate(['/qr-details']);
+    this.sharedDetailsService.setQRStatus(false);
   }
 }

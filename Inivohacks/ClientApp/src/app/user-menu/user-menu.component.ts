@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserDetailsService } from '../services/user-details.service';
+import { SharedDetailsService } from '../services/shared-details.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -10,10 +10,10 @@ import { UserDetailsService } from '../services/user-details.service';
 export class UserMenuComponent {
   isNavigationActive = false;
   isCustomer = false;
-  constructor(private router: Router,private userDetailsService:UserDetailsService) { }
+  constructor(private router: Router, private sharedDetailsService: SharedDetailsService) { }
 
   async ngOnInit() {
-    await this.userDetailsService.isCustomer$.subscribe((value) => {
+    await this.sharedDetailsService.isCustomer$.subscribe((value) => {
       this.isCustomer = value;
     });
 
@@ -26,7 +26,7 @@ export class UserMenuComponent {
 
   logOut() {
     this.router.navigate(['']);
-    this.userDetailsService.setCustomerStatus(false);
+    this.sharedDetailsService.setCustomerStatus(false);
     this.isCustomer = false;
   }
 

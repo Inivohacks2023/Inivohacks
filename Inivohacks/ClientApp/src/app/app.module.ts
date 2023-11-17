@@ -22,6 +22,7 @@ import { LoginComponent } from './login/login.component';
 import { QrScanComponent } from './qr-scan/qr-scan.component';
 import { UserMenuComponent } from './user-menu/user-menu.component';
 import { HeaderComponent } from './header/header.component';
+import { QrDetailsComponent } from './qr-details/qr-details.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HeaderComponent } from './header/header.component';
     LoginComponent,
     QrScanComponent,
     UserMenuComponent,
-    HeaderComponent
+    HeaderComponent,
+    QrDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,6 +41,7 @@ import { HeaderComponent } from './header/header.component';
     RouterModule.forRoot([
       { path: '', component: LoginComponent , pathMatch: 'full' },
       { path: 'qr-scan', component: QrScanComponent },
+      { path: 'qr-details', component: QrDetailsComponent },
     ]),
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),

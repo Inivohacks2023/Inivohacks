@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserDetailsService } from '../services/user-details.service';
+import { SharedDetailsService } from '../services/shared-details.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { UserDetailsService } from '../services/user-details.service';
 export class LoginComponent implements OnInit {
 
     
-  constructor(private router: Router, private userDetailsService: UserDetailsService) { }
+  constructor(private router: Router, private sharedDetailsService: SharedDetailsService) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +24,6 @@ export class LoginComponent implements OnInit {
   }
   loginAsCustomer() {
     this.router.navigate(['/qr-scan']);
-    this.userDetailsService.setCustomerStatus(true);
+    this.sharedDetailsService.setCustomerStatus(true);
   }
 }
