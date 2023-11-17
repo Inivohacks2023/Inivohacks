@@ -8,4 +8,9 @@
 
 APIs
 - Users 
-- 
+- Manufacturers
+- Products
+- Permissions
+- Certificates
+- Scans
+- Codes
