@@ -30,8 +30,6 @@ export class LoginComponent implements OnInit {
   }
 
   async loginAsSupplierManufacturer() {
-    console.log('username: ', this.username)
-    console.log('password: ', this.password)
 
     const loginCreds = {
       username: this.username,
@@ -41,10 +39,9 @@ export class LoginComponent implements OnInit {
     await this.apiService.loginRequest(loginCreds)
       .subscribe(response => {
         console.log('response: ', response);
-        localStorage.setItem('token', response);
+        localStorage.setItem('token', response.token);
         this.isValidUser = true;
       }, error => {
-        console.error(error);
         localStorage.removeItem('token');
       })
     if (this.isValidUser) {
