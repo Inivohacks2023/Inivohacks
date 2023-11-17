@@ -39,7 +39,7 @@ namespace Inivohacks.Controllers
             }
 
         }
-
+/*
         [HttpPost("AddTrackingCode")]
         public async Task<ActionResult<ScannedItemInfomationModel>> Addscan(TrackingCodeDTO trackingoCodeObj)
         {
@@ -56,7 +56,7 @@ namespace Inivohacks.Controllers
             }
 
 
-        }
+        }*/
         [HttpPut("Rebrand")]
         public async Task<ActionResult<string>> Rebrand(RebrandTrackerCodeDTO rebrandObj)
         {
@@ -89,8 +89,24 @@ namespace Inivohacks.Controllers
             }
         }
 
-        [HttpPost("Transfer")]
-        public async Task<ActionResult<string>> Transfer(TransferBatchDTO transferBatchDTO)
+        [HttpPost("RequestTransfer")]
+        public async Task<ActionResult<string>> RequestTransfer(TransferBatchDTO transferBatchDTO)
+        {
+            try
+            {
+
+                var result = await _iscanService.TransferItem(transferBatchDTO);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+
+            }
+        }
+
+        [HttpPost("AcceptTransfer")]
+        public async Task<ActionResult<string>> AcceptTransfer(TransferBatchDTO transferBatchDTO)
         {
             try
             {

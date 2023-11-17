@@ -89,16 +89,16 @@ namespace Inivohacks.BL.BLServices
 
         public async Task<string> Recall(RecallDTO model)
         {
-            var obj = await _iTrackingCodeRepositoryForScan.Search(o => o.TrackingCodeID == model.GuId).FirstOrDefaultAsync();
+            var obj = await _iTrackingCodeRepositoryForScan.Search(o => o.BatchNumber == model.BatchId).FirstOrDefaultAsync();
 
             if (obj == null)
             {
                 throw new Exception("The object to rebrand with given guId was not found");
             }
             await _iScanRepository.AddAsync(new Scan()
-            {
-                ScanGuid= model.GuId,
-                TrackingCodeID = model.GuId,
+            {/*
+                BA= model.BatchId,
+                TrackingCodeID = model.GuId,*/
                 InteractionType = StaticVariables.Recall,
                 InteractionDescription = $"Medicine was recalled on {DateTime.Now.ToString("dddd, dd MMMM yyyy")}",
                 CertificateID = model.CertificateId,
