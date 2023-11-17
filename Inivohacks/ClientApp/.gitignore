@@ -1,3 +1,6 @@
+#distributables
+/dist
+
 # globs
 Makefile.in
 *.userprefs
