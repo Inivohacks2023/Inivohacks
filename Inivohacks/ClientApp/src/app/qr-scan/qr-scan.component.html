@@ -1,12 +1,5 @@
 <div class="grid grid-cols-12 grid-rows-[210px_minmax(900px,_1fr)_100px] h-full w-full overflow-y-hidden bg-supplier-scan-bg bg-no-repeat overflow-x-hidden">
-  <div class="w-full h-[70px] col-span-12 bg-white flex justify-between items-center px-[42px] border-2 border-b-[£F3F3F3]">
-    <nb-user size="large"
-             name="Azam Fhamy"
-             title="Supplier"
-             [picture]="base64image">
-    </nb-user>
-    <button class="w-[86px]" nbButton hero status="primary">Logout</button>
-  </div>
+  <app-header class="w-full col-span-12"></app-header>
   <div class="col-span-3 z-10 flex items-center">
     <img src="../../assets/images/doc1.png" alt="Doctor 1" />
   </div>
@@ -28,8 +21,12 @@
           <p class="text-[20px] font-medium">Or Scan the QR</p>
         </div>
       </div>
-      <button class="w-full mb-10" nbButton hero status="info">Scan QR</button>
-      <img src="../../assets/images/sample-QR.png" alt="Sample QR" />
+      <button class="w-full mb-10" nbButton hero status="info" (click)="scanQR()">Scan QR</button>
+      <div id="qr-container" class="w-[330px]">
+        <img src="../../assets/images/sample-QR.png" alt="Sample QR" *ngIf="!isCameraVisible"/>
+        <ngx-scanner-qrcode #action="scanner" *ngIf="isCameraVisible" (event)="handleQrCodeResult($event)"></ngx-scanner-qrcode>
+      </div>
+
     </div>
   </div>
   <div class="col-span-3"></div>

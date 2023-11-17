@@ -20,7 +20,7 @@ module.exports = {
       },
       backgroundImage: {
         'login-bg': "url('./assets/images/bg-login.png')",
-        'supplier-scan-bg': "url('./assets/images/bg-supplier-scan.png')",
+        'supplier-scan-bg': "url('./assets/images/bg.png')",
       }
 },
   },
