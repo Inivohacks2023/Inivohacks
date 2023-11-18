@@ -42,7 +42,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IScanService, ScanService>();
 builder.Services.AddScoped<ITrackingCodeRepositoryForScan, TrackingCodeRepositoryForScan>();
 builder.Services.AddScoped<IScanRepository, ScanRepository>();
-builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ICertPermission, CertPermissionRepository>();
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
