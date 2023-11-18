@@ -9,7 +9,7 @@ namespace Inivohacks.DAL.Repositories
 {
     public interface ICertificateRepository :IRepository<Certificate>
     {
-        Task<Certificate> AddCertPermissionAsync(Certificate certificate);
+        public Task<Certificate> AddCertPermissionAsync(Certificate certificate);
 
         public Task<Certificate> GetCertificateByTokenAsync(string token);
         

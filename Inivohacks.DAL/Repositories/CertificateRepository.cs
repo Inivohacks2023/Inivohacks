@@ -22,6 +22,11 @@ namespace Inivohacks.DAL.Repositories
            return cert;
         }
 
+        public IAsyncEnumerable<Certificate> GetAllCertificateAsync(int productID)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Certificate> GetCertificateByTokenAsync(string token)
         {
             try

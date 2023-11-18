@@ -56,9 +56,13 @@ namespace Inivohacks.BL.BLServices
             throw new NotImplementedException();
         }
 
-        public Task<CertificateDto> GetCertificateByTokenAsync(string token)
+        public async Task<CertificateDto> GetCertificateByTokenAsync(string token)
         {
-            throw new NotImplementedException();
+            try { 
+                Certificate cert = await _certifiRepository.GetCertificateByTokenAsync(token);
+                return cert.TransformDALtoAPI();
+            }
+            catch { return null; }
         }
 
         public async IAsyncEnumerable<CertificateDto> GetCertificatesByProductIdAsync(int productId)

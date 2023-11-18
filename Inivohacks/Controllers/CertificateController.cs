@@ -75,7 +75,7 @@ namespace Inivohacks.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        [HttpGet("{token}")]
+        [HttpGet("ByToken/{token}")]
         public async Task<ActionResult<CertificateModel>> CertificateDetailsbyToken(string token)
         {
             var c = await _certService.GetCertificateByTokenAsync(token);
@@ -88,7 +88,7 @@ namespace Inivohacks.Controllers
         }
 
 
-        [HttpGet("{productId}")]
+        [HttpGet("ByProductId/{productId}")]
         public async Task<ActionResult<CertificateModel>> GetAllCertificatesForProduct(int productId)
         {
 
