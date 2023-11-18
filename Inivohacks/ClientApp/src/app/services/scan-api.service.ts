@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ScanApiService {
 
-  private baseUrl = 'https://localhost:7116'
+  private baseUrl = 'https://safemed.azurewebsites.net'
   constructor(private httpClient: HttpClient) { }
 
   
@@ -44,6 +44,17 @@ export class ScanApiService {
     return this.httpClient.get<any>(url);
   }
 
+
+  getDetails(id:any) {
+
+
+    const headers = new HttpHeaders({
+      'responseType': 'text',
+    });
+    const url = 'https://safemed.azurewebsites.net/api/Scan/ScanForDetails?TrackingCodeID=00000001-0070-0001-0102-030405060708';
+    debugger;
+    return this.httpClient.get<any>(url);
+  }
 
 }
 
