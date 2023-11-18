@@ -32,7 +32,7 @@ export class HandoverProductsComponent {
     await this.scanApiService.requestTransfer(obj).subscribe(
       async (data:any) => {
         if (data != null) {
-          debugger;
+          ;
 
           if (confirm("Transfer request made successfully")) {
             window.location.replace("/manufacturer")
@@ -42,7 +42,7 @@ export class HandoverProductsComponent {
           
         }
         else {
-          debugger;
+          ;
 
         }
       },
@@ -50,7 +50,7 @@ export class HandoverProductsComponent {
         alert(error.error);
       }
     );
-    debugger;
+    ;
 
   }
 }
