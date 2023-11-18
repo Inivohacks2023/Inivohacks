@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ScanApiService } from '../app/services/scan-api.service';
 import {
   NbThemeModule,
   NbLayoutModule,
@@ -88,7 +89,7 @@ import { ProductDetailsUpdateComponent } from './product-details-update/product-
     NbSelectModule,
     NbToggleModule
   ],
-  providers: [],
+  providers: [ScanApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -96,7 +96,7 @@ namespace Inivohacks.Controllers
             {
 
                 var result = await _iscanService.RequestTransfer(transferBatchDTO);
-                return Ok(result);
+                return Ok(new { a=result});
             }
             catch (Exception e)
             {
