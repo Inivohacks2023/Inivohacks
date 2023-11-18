@@ -9,19 +9,19 @@
         <nb-card-body>
           <div class="container">
             <div class="tile wide quote">
-              <div class="header">
-                  <div class="title">Total Value</div>
+              <div class="header flex items-center p-5">
+                <div class="title"> Explore and manage your medicinal products effortlessly. Add new products, view existing ones, and set permissions to control access. Additionally, you can create certificates related to your medicinal items for added security.</div>
               </div>
-              <div class="body">
-                <div class="title">Product Details</div>
+              <div class="body flex items-center justify-center" (click)="navigateToViewProducts()">
+                <div class="title">View Products</div>
               </div>
             </div>
             <div class="tile wide invoice">
-              <div class="header">
-                  <div class="title">Total Value</div>
+              <div class="header flex items-center p-5">
+                <div class="title">Swiftly scan and track your medicinal products using a unique tracking code. Validate certificates to ensure authenticity and take actions based on the certificate status. This page also allows you to conveniently view QR codes associated with your medicinal items.</div>
               </div>
-              <div class="body">
-                <div class="title">Invoices Awaiting Approval</div>
+              <div class="body flex items-center justify-center" (click)="navigateToReadProducts()">
+                <div class="title">Read Products</div>
               </div>
             </div>
           </div>
