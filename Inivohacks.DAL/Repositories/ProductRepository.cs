@@ -33,5 +33,13 @@ namespace Inivohacks.DAL.Repositories
                 yield return plist;
             }
         }
+
+        public async IAsyncEnumerable<Product> GetAllProductByManufacturerIDAsync(int manufacturerID)
+        {
+            foreach (var plist in _dbContext.Products.Where(x => x.ManufacturerID == manufacturerID).ToList())
+            {
+                yield return plist;
+            }
+        }
     }
 }

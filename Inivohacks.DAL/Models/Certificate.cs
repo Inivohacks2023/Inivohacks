@@ -16,6 +16,6 @@ namespace Inivohacks.DAL.Models
         public  Product Product { get; set;}
         public ICollection<CertPermission> CertPermissions { get; set; }
         public ICollection<Scan> Scans { get; set; }
-       
+        public string Token { get; set; }
     }
 }

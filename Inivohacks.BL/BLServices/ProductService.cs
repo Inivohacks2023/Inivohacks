@@ -38,6 +38,17 @@ namespace Inivohacks.BL.BLServices
             return status;
         }
 
+        public async IAsyncEnumerable<ProductDto> GetAllProductByManufactureID(int manufactureId)
+        {
+            IAsyncEnumerable<Product> ProductList = productRepository.GetAllProductByManufacturerIDAsync(manufactureId);
+
+
+            await foreach (var prod in ProductList)
+            {
+                yield return prod.TransformDALtoAPI();
+            }
+        }
+
         public async IAsyncEnumerable<ProductDto> GetAllProductsAsync()
         {
             IAsyncEnumerable<Product> ProductList = productRepository.GetAllProductAsync();

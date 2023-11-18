@@ -16,7 +16,8 @@ namespace Inivohacks.DAL.Models
         public string Password { get; set; }
         public int ManufacturerID { get; set; }
         public bool LoginDisabled { get; set; }
-
+        public bool isManufacturer { get; set; }
+        public bool isSupplier { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
         public ICollection<Scan> Scans { get; set; }
         

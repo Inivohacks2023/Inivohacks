@@ -9,5 +9,11 @@ namespace Inivohacks.BL
     public static class StaticVariables
     {
         public static readonly string SuccessMessage = "Success";
+        public static readonly string Recall = "Recalled";
+        public static readonly string TransferRequested = "Transfer Requested";
+        public static readonly string TransferAccepted = "Transfer Accepted";
+        public static readonly string Rebranded = "Rebranded";
+        public static readonly string Created = "Created";
+
     }
 }

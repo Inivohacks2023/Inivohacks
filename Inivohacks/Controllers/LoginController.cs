@@ -45,6 +45,9 @@ namespace Inivohacks.Controllers
                 new Claim("FirstName", user.FirstName),
                 new Claim("LastName", user.LastName),
                 new Claim("Username", user.Username),
+                new Claim("isManufacturer", user.isManufacturer.ToString()),
+                new Claim("isSupplier", user.isSupplier.ToString()),
+                new Claim("manufacturerId", user.ManufacturerID.ToString()),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));

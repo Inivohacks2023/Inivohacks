@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
       const decoded = jwtDecode(this.token);
       console.log('decodedToken', decoded);
       //TODO: navigation to supllier or manufacturer
-      this.router.navigate(['']);
+      this.router.navigate(['/manufacturer']);
     }
   }
 }

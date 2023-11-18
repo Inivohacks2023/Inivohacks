@@ -62,6 +62,10 @@ namespace Inivohacks.DAL.Migrations
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("CertificateID");
 
                     b.HasIndex("ProductID");
@@ -289,6 +293,12 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("isManufacturer")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isSupplier")
+                        .HasColumnType("bit");
+
                     b.HasKey("UserID");
 
                     b.HasIndex("ManufacturerID");
@@ -304,7 +314,9 @@ namespace Inivohacks.DAL.Migrations
                             LoginDisabled = false,
                             ManufacturerID = 1,
                             Password = "123",
-                            Username = "jesse"
+                            Username = "jesse",
+                            isManufacturer = false,
+                            isSupplier = false
                         });
                 });
 

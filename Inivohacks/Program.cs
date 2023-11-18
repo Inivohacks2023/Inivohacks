@@ -25,6 +25,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<ICertificateService, CertificateService>();
+builder.Services.AddScoped<ICertificateRepository, CertificateRepository>();
+builder.Services.AddScoped<IPermissionService, PermissionService>();
+builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
+builder.Services.AddScoped<ICodeService, CodeService>();
 builder.Services.AddScoped<IManufactureService, ManufactureService>();
 builder.Services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
 builder.Services.AddScoped<ICodeService, CodeService>();
@@ -36,7 +42,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IScanService, ScanService>();
 builder.Services.AddScoped<ITrackingCodeRepositoryForScan, TrackingCodeRepositoryForScan>();
 builder.Services.AddScoped<IScanRepository, ScanRepository>();
-builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ICertPermission, CertPermissionRepository>();
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

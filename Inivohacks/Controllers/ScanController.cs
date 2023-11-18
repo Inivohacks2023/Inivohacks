@@ -17,12 +17,12 @@ namespace Inivohacks.Controllers
             _iscanService = iscanService;
 
         }
-        [HttpGet("ScanForDetails/{TrackingCodeID}")]
-        public async Task<ActionResult<ScannedItemInfomationModel>> GetBatchById(Guid TrackingCodeID)
+        [HttpGet("ScanForDetails")]
+        public async Task<ActionResult<ScannedItemInfomationModel>> GetBatchById(Guid TrackingCodeID,int? CertificateId,int? UserId,string?Latitude,string ?Longitude, string? Location)
         {
             try
             {
-                var result = await _iscanService.GetItemInformation(TrackingCodeID);
+                var result = await _iscanService.GetItemInformation(TrackingCodeID, CertificateId, UserId,Latitude,Longitude,Location);
                 if (result != null)
                 {
                     return Json(result);
@@ -39,7 +39,7 @@ namespace Inivohacks.Controllers
             }
 
         }
-
+/*
         [HttpPost("AddTrackingCode")]
         public async Task<ActionResult<ScannedItemInfomationModel>> Addscan(TrackingCodeDTO trackingoCodeObj)
         {
@@ -56,7 +56,7 @@ namespace Inivohacks.Controllers
             }
 
 
-        }
+        }*/
         [HttpPut("Rebrand")]
         public async Task<ActionResult<string>> Rebrand(RebrandTrackerCodeDTO rebrandObj)
         {
@@ -74,12 +74,12 @@ namespace Inivohacks.Controllers
         }
 
         [HttpPut("Recall")]
-        public async Task<ActionResult<string>> Recall(Guid guId)
+        public async Task<ActionResult<string>> Recall(RecallDTO model)
         {
             try
             {
 
-                var result = await _iscanService.Recall(guId);
+                var result = await _iscanService.Recall(model);
                 return Ok(result);
             }
             catch (Exception e)
@@ -89,13 +89,29 @@ namespace Inivohacks.Controllers
             }
         }
 
-        [HttpPost("Transfer")]
-        public async Task<ActionResult<string>> Transfer(TransferBatchDTO transferBatchDTO)
+        [HttpPost("RequestTransfer")]
+        public async Task<ActionResult<string>> RequestTransfer(TransferBatchDTO transferBatchDTO)
         {
             try
             {
 
-                var result = await _iscanService.TransferItem(transferBatchDTO);
+                var result = await _iscanService.RequestTransfer(transferBatchDTO);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+
+            }
+        }
+
+        [HttpPost("AcceptTransfer")]
+        public async Task<ActionResult<string>> AcceptTransfer(TransferBatchDTO transferBatchDTO)
+        {
+            try
+            {
+
+                var result = await _iscanService.AcceptTransfer(transferBatchDTO);
                 return Ok(result);
             }
             catch (Exception e)

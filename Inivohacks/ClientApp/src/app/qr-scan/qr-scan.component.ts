@@ -27,7 +27,7 @@ export class QrScanComponent {
       } else {
         console.error('ngx-scanner-qrcode component not available.');
       }
-    }, 500);
+    }, 1000);
     if (!this.isCameraVisible && this.action) {
       this.action.stop();
     }
@@ -37,7 +37,7 @@ export class QrScanComponent {
   handleQrCodeResult(result: any) {
     if (!this.hasProcessedQr && (result != null || typeof result !== 'undefined')) {
       this.qrDetails = result;
-      console.log('QR Code Details:', this.qrDetails);
+      console.log('QR Code Detailss:', this.qrDetails);
       this.hasProcessedQr = true; 
       this.isCameraVisible = false;
       if (!this.isCameraVisible && this.action) {
