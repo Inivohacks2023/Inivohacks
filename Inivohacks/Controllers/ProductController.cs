@@ -67,5 +67,26 @@ namespace Inivohacks.Controllers
             return Ok(productListmodel);
 
         }
+
+
+        [HttpGet("ByProductId/{manufactureID}")]
+        public async Task<ActionResult<ProductModel>> getAllProductbyManufactureID(int manufactureID)
+        {
+
+            List<ProductModel> results = new List<ProductModel>();
+
+            IAsyncEnumerable<ProductDto> certs =  _productService.GetAllProductByManufactureID(manufactureID);
+
+            if (certs == null)
+            {
+                return NotFound();
+            }
+            await foreach (var r in certs)
+            {
+                results.Add(MapperExtentions.ToViewModel<ProductDto, ProductModel>(r));
+            }
+
+            return Ok(results);
+        }
     }
 }
