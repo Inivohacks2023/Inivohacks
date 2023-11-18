@@ -4,6 +4,7 @@ using Inivohacks.DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inivohacks.DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231118021844_Certificate_TokenField")]
+    partial class Certificate_TokenField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -293,12 +296,6 @@ namespace Inivohacks.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isManufacturer")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isSupplier")
-                        .HasColumnType("bit");
-
                     b.HasKey("UserID");
 
                     b.HasIndex("ManufacturerID");
@@ -314,9 +311,7 @@ namespace Inivohacks.DAL.Migrations
                             LoginDisabled = false,
                             ManufacturerID = 1,
                             Password = "123",
-                            Username = "jesse",
-                            isManufacturer = false,
-                            isSupplier = false
+                            Username = "jesse"
                         });
                 });
 

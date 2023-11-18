@@ -14,6 +14,8 @@ namespace Inivohacks.ViewModels
         public string Password { get; set; }
         public int ManufacturerID { get; set; }
         public bool LoginDisabled { get; set; }
+        public bool isManufactuer { get; set; }
+        public bool isSupplier{ get; set; }
 
     }
 }
