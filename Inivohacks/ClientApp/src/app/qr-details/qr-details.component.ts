@@ -32,7 +32,7 @@ export class QrDetailsComponent {
   }
 
   setValue() {
-    this.name = 'Lol';
+    this.name = '';
   }
 
   backToScan() {
