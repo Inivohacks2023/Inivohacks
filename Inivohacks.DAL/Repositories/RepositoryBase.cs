@@ -24,7 +24,7 @@ namespace Inivohacks.DAL.Repositories
         {
             //AssignDate(entity);
             _dbContext.Set<TEntity>().Update(entity);
-            await _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
             return entity;
         }
 

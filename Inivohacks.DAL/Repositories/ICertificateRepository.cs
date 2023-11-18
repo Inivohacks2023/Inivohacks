@@ -14,5 +14,6 @@ namespace Inivohacks.DAL.Repositories
         public Task<Certificate> GetCertificateByTokenAsync(string token);
         
         public IAsyncEnumerable<Certificate> GetAllCertificateAsync(int productID);
+        public bool RevokeCertificate(string token);
     }
 }

@@ -43,7 +43,7 @@ namespace Inivohacks.Controllers
             await _certService.CreateCertificateAsync(
                 MapperExtentions.ToDto<CertificateModel, CertificateDto>(viewModel));
 
-            return Ok();
+            return Ok(token);
         }
 
         private string GenerateJwtToken(CertificateModel cert)
@@ -57,7 +57,7 @@ namespace Inivohacks.Controllers
 
 
             foreach (int id in cert.PermissionList) {
-                claims.Append(new Claim(id.ToString(), "true"));
+                claims = claims.Append(new Claim(id.ToString(), "true")).ToArray();
             }
             
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
@@ -86,6 +86,34 @@ namespace Inivohacks.Controllers
 
             return Ok(MapperExtentions.ToViewModel<CertificateDto, CertificateModel>(c));
         }
+
+
+        [HttpGet("IsValid/{token}")]
+        public async Task<ActionResult<CertificateModel>> IsValidToken(string token)
+        {
+            var c = await _certService.GetCertificateByTokenAsync(token);
+            if (c == null)
+            {
+                return NotFound();
+            }
+            if (c.InUse)
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
+
+        [HttpGet("Revoke/{token}")]
+        public async Task<ActionResult<CertificateModel>> RevokeToken(string token)
+        {
+            var c = await _certService.RevokeCertificate(token);
+            if (c == null)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+
 
 
         [HttpGet("ByProductId/{productId}")]
