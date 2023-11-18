@@ -23,7 +23,7 @@ namespace Inivohacks.BL.BLServices
         }
         public async Task<ScannedItemInfomationModel?> GetItemInformation(Guid guId, int? CertificateId, int? UserId, string? Latitude, string? Longitude, string? Location)
         {
-            CertificateId ??= 1;
+            CertificateId ??= 4;
             UserId ??= 1;
             Latitude ??= "";
             Location ??= "";
