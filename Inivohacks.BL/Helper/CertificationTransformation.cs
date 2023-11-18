@@ -33,7 +33,11 @@ namespace Inivohacks.BL.Helper
 
             var item = new Certificate()
             {
-               
+                ProductID = certificate.ProductID,
+                InUse = certificate.InUse,
+                ExpiryDate = certificate.ExpiryDate,
+                CertificateID = certificate.CertificateID,
+                Token =certificate.Token
 
             };
 

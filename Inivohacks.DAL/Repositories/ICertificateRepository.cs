@@ -10,5 +10,6 @@ namespace Inivohacks.DAL.Repositories
     public interface ICertificateRepository :IRepository<Certificate>
     {
         Task<int> AddCertPermissionAsync(Certificate certificate);
+        public IAsyncEnumerable<Certificate> GetAllCertificateAsync(int productID);
     }
 }

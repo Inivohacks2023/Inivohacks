@@ -57,9 +57,13 @@ namespace Inivohacks.BL.BLServices
             throw new NotImplementedException();
         }
 
-        public IAsyncEnumerable<CertificateDto> GetCertificatesByProductIdAsync(int productId)
+        public async IAsyncEnumerable<CertificateDto> GetCertificatesByProductIdAsync(int productId)
         {
-            throw new NotImplementedException();
+            IAsyncEnumerable<Certificate> certificateList = _certifiRepository.GetAllCertificateAsync(productId);
+            await foreach (var cert in certificateList)
+            {
+                yield return cert.TransformDALtoAPI();
+            }
         }
     }
 }

@@ -9,5 +9,6 @@ namespace Inivohacks.DAL.Repositories
 {
     public interface ICertPermission :IRepository<CertPermission>
     {
+        public string GetPermissionNamebyID(int certID);
     }
 }

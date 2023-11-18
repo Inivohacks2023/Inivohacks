@@ -1,5 +1,6 @@
 ﻿using Inivohacks.DAL.DataContext;
 using Inivohacks.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,9 @@ namespace Inivohacks.DAL.Repositories
             return Convert.ToInt32(cerID);
         }
 
-
+        public IAsyncEnumerable<Certificate> GetAllCertificateAsync(int productID)
+        {
+            return Search(a => a.ProductID == productID).AsAsyncEnumerable();
+        }
     }
 }
