@@ -103,6 +103,18 @@ namespace Inivohacks.Controllers
             return NotFound();
         }
 
+        [HttpGet("Revoke/{token}")]
+        public async Task<ActionResult<CertificateModel>> RevokeToken(string token)
+        {
+            var c = await _certService.RevokeCertificate(token);
+            if (c == null)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+
+
 
         [HttpGet("ByProductId/{productId}")]
         public async Task<ActionResult<CertificateModel>> GetAllCertificatesForProduct(int productId)

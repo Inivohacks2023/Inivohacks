@@ -40,5 +40,23 @@ namespace Inivohacks.DAL.Repositories
                 return null;
             }
         }
+
+        public bool RevokeCertificate(string token)
+        {
+            try
+            {
+                Certificate cert = Search(a => string.Equals(a.Token, token)).FirstOrDefault();
+                if (cert != null)
+                {
+                    cert.InUse = false;
+                    UpdateAsync(cert);
+                    return true;
+                }
+
+                return false;
+            }
+            catch { return false; }
+
+        }
     }
 }
