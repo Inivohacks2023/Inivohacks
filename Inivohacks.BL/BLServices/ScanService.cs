@@ -275,7 +275,7 @@ namespace Inivohacks.BL.BLServices
 
             if (transferType == "None" || transferType == StaticVariables.TransferAccepted)
             {
-                throw new Exception("No transfer request");
+                throw new Exception("No transfer request for tracking code");
             }
 
             
