@@ -1,0 +1,63 @@
+<div class="grid grid-cols-12 grid-rows-[110px_minmax(900px,_1fr)_100px] h-full w-full overflow-y-hidden bg-supplier-scan-bg bg-no-repeat overflow-x-hidden">
+  <app-header class="w-full col-span-12"></app-header>
+  <div class="col-span-3 z-10 flex items-center">
+  </div>
+  <div class="col-span-6 z-10 text-center details">
+    <h1 class="mb-8">Add New Products</h1>
+    <div class="w-full h-full flex justify-center">
+      <nb-card class="rounded-[10px] h-min w-5/6  shadow-login text-center grid-rows-9 px-20 py-16">
+        <nb-card-body class="overflow-y-hidden">
+          <div class="grid grid-cols-2 mb-5">
+            <div class="flex items-center pl-10">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                Tracking Code :
+              </label>
+            </div>
+            <div class="">
+              <input [(ngModel)]="trackingCode" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Product ID">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 mb-5">
+            <div class="flex items-center pl-10">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                Latitude :
+              </label>
+            </div>
+            <div class="">
+              <input [(ngModel)]="latitude" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Product Name">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 mb-5">
+            <div class="flex items-center pl-10">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                Longitude :
+              </label>
+            </div>
+            <div class="">
+              <input [(ngModel)]="longitude" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Dosage">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 mb-5">
+            <div class="flex items-center pl-10">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                Location :
+              </label>
+            </div>
+            <div class="">
+              <input [(ngModel)]="locationName" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Package Type">
+            </div>
+          </div>
+          <div class="mt-8 flex justify-center">
+            <div class="">
+              <button nbButton hero status="success" (click)="save()">Save</button>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+  <div class="col-span-3 flex items-center">
+  </div>
+  <div class="z-0 w-full h-[70px] col-span-12 bg-white flex justify-between items-center px-[42px] border-2 border-b-[#F3F3F3] fixed bottom-0">
+  </div>
+</div>

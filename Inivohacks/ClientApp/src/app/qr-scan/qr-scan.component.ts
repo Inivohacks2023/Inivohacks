@@ -35,7 +35,7 @@ export class QrScanComponent {
   }
 
   handleQrCodeResult(result: any) {
-    if (!this.hasProcessedQr && (result.data != null || typeof result.data !== 'undefined')) {
+    if (!this.hasProcessedQr && (result != null || typeof result !== 'undefined')) {
       this.qrDetails = result;
       console.log('QR Code Detailss:', this.qrDetails);
       this.hasProcessedQr = true; 

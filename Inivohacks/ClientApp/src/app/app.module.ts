@@ -31,6 +31,7 @@ import { QrDetailsComponent } from './qr-details/qr-details.component';
 import { ManufacturerHomeComponent } from './manufacturer-home/manufacturer-home.component';
 import { AddProductsComponent } from './add-products/add-products.component';
 import { AddPermissionComponent } from './add-permission/add-permission.component';
+import { HandoverProductsComponent } from './handover-products/handover-products.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AddPermissionComponent } from './add-permission/add-permission.componen
     QrDetailsComponent,
     ManufacturerHomeComponent,
     AddProductsComponent,
-    AddPermissionComponent
+    AddPermissionComponent,
+    HandoverProductsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -56,6 +58,7 @@ import { AddPermissionComponent } from './add-permission/add-permission.componen
       { path: 'manufacturer/home', component: ManufacturerHomeComponent },
       { path: 'manufacturer/add-products', component: AddProductsComponent },
       { path: 'manufacturer/add-permission', component: AddPermissionComponent },
+      { path: 'manufacturer/handover-products', component: HandoverProductsComponent },
     ]),
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
