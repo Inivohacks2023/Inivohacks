@@ -3,7 +3,7 @@
   <div class="col-span-3 z-10 flex items-center">
   </div>
   <div class="col-span-6 z-10 text-center details">
-    <h1 class="mb-8">Accept Product Ownership</h1>
+    <h1 class="mb-8">Rebrand Item</h1>
     <div class="w-full h-full flex justify-center">
       <nb-card class="rounded-[10px] h-min w-5/6  shadow-login text-center grid-rows-9 px-20 py-16">
         <nb-card-body class="overflow-y-hidden">
@@ -15,6 +15,18 @@
             </div>
             <div class="">
               <input [(ngModel)]="trackingCode" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="XXXXXXX">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 mb-5">
+            <div class="flex items-center pl-10">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                Product:
+              </label>
+            </div>
+            <div class="">
+              <select [(ngModel)]="selectedValue" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]">
+                <option *ngFor="let c of productList" [value]="c.value">{{c.display}}</option>
+              </select>
             </div>
           </div>
           <div class="grid grid-cols-2 mb-5">
