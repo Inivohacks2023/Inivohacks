@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ScanApiService } from '../app/services/scan-api.service';
 import {
   NbThemeModule,
   NbLayoutModule,
@@ -37,6 +38,7 @@ import { HandoverProductsComponent } from './handover-products/handover-products
 import { ManufacturerMenuComponent } from './manufacturer-menu/manufacturer-menu.component';
 import { AcceptProductsComponent } from './accept-products/accept-products.component';
 import { ProductDetailsUpdateComponent } from './product-details-update/product-details-update.component';
+import { RebrandComponent } from './rebrand/rebrand.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { ProductDetailsUpdateComponent } from './product-details-update/product-
     AddPermissionComponent,
     HandoverProductsComponent,
     ManufacturerMenuComponent,
-    AcceptProductsComponent
+    AcceptProductsComponent,
+    RebrandComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -70,6 +73,7 @@ import { ProductDetailsUpdateComponent } from './product-details-update/product-
       { path: 'manufacturer/handover-products', component: HandoverProductsComponent },
       { path: 'manufacturer', component: ManufacturerMenuComponent },
       { path: 'manufacturer/accept-products', component: AcceptProductsComponent },
+      { path: 'manufacturer/rebrand-products', component: RebrandComponent },
     ]),
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
@@ -90,7 +94,7 @@ import { ProductDetailsUpdateComponent } from './product-details-update/product-
     NbToggleModule,
     NbRadioModule,
   ],
-  providers: [],
+  providers: [ScanApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
