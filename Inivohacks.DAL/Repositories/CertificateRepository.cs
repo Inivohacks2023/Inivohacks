@@ -16,16 +16,21 @@ namespace Inivohacks.DAL.Repositories
         {
             this._dbContext = dbContext;
         }
-        public async Task<int> AddCertPermissionAsync(Certificate certificate)
+        public async Task<Certificate> AddCertPermissionAsync(Certificate certificate)
         {
-            await AddAsync(certificate);
-           var cerID= _dbContext.Certificates.OrderByDescending(x => x.CertificateID).Select(y => y.CertificateID);
-            return Convert.ToInt32(cerID);
+           var cert = await AddAsync(certificate);
+           return cert;
         }
 
-        public IAsyncEnumerable<Certificate> GetAllCertificateAsync(int productID)
+        public async Task<Certificate> GetCertificateByTokenAsync(string token)
         {
-            return Search(a => a.ProductID == productID).AsAsyncEnumerable();
+            try
+            {
+                return Search(a => a.Token.Equals(token)).FirstOrDefault();
+            }
+            catch {
+                return null;
+            }
         }
     }
 }

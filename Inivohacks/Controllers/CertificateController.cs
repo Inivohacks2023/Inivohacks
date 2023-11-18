@@ -1,8 +1,16 @@
 ﻿using Inivohacks.BL.BLServices;
 using Inivohacks.BL.DTOs;
+using Inivohacks.DAL.Models;
 using Inivohacks.Mapper;
 using Inivohacks.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Inivohacks.Controllers
 {
@@ -11,11 +19,13 @@ namespace Inivohacks.Controllers
     public class CertificateController : Controller
     {
         private readonly ICertificateService _certService;
+        private readonly IConfiguration _configuration; 
 
 
-        public CertificateController(ICertificateService certService)
+        public CertificateController(ICertificateService certService, IConfiguration configuration)
         {
             _certService = certService;
+            _configuration = configuration;
         }
 
         [HttpPost]
@@ -27,10 +37,42 @@ namespace Inivohacks.Controllers
                 return BadRequest(ModelState);
             }
 
-            status = await _certService.CreateCertificateAsync(
+            string token = GenerateJwtToken(viewModel);
+            viewModel.Token = token; 
+           
+            await _certService.CreateCertificateAsync(
                 MapperExtentions.ToDto<CertificateModel, CertificateDto>(viewModel));
 
             return Ok();
+        }
+
+        private string GenerateJwtToken(CertificateModel cert)
+        {
+            List<string> permissionIds = new List<string>();
+            Claim[] claims = new[]
+            {
+                new Claim("ProductId", cert.ProductID.ToString()),
+                new Claim("ExpiryDate", cert.ExpiryDate.ToString()),
+            };
+
+
+            foreach (int id in cert.PermissionList) {
+                claims.Append(new Claim(id.ToString(), "true"));
+            }
+            
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var expires = DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:ExpirationInMinutes"]));
+
+            var token = new JwtSecurityToken(
+                _configuration["Jwt:Issuer"],
+                _configuration["Jwt:Audience"],
+                claims,
+                expires: expires,
+                signingCredentials: credentials
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
         [HttpGet("{token}")]
