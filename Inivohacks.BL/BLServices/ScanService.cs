@@ -55,7 +55,7 @@ namespace Inivohacks.BL.BLServices
             {
                 var loopObj = listOfScansForTrackingCode[i];
 
-                if (loopObj.InteractionType == StaticVariables.TransferAccepted && lastAvailableLocation!= "Not Given")
+                if (loopObj.InteractionType == StaticVariables.TransferAccepted && lastAvailableLocation== "Not Given")
                 {
                     lastAvailableLocation = loopObj.LocationName;
                 }
