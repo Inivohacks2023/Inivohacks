@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       })
     if (this.isValidUser) {
       //TODO: navigation to supllier or manufacturer
-      this.router.navigate(['']);
+      this.router.navigate(['/manufacturer']);
     }
   }
 }

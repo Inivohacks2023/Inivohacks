@@ -12,7 +12,7 @@ export class HandoverProductsComponent {
   longitude: string = '';
   locationName: string = '';
 
-  save() {
+  transfer() {
 
   }
 }
