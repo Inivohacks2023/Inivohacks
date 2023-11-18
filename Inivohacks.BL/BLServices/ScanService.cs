@@ -1,4 +1,5 @@
-﻿using Inivohacks.BL.DTOs.Models;
+﻿using Inivohacks.BL.DTOs;
+using Inivohacks.BL.DTOs.Models;
 using Inivohacks.DAL.Models;
 using Inivohacks.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -275,7 +276,7 @@ namespace Inivohacks.BL.BLServices
 
             if (transferType == "None" || transferType == StaticVariables.TransferAccepted)
             {
-                throw new Exception("No transfer request for tracking code");
+                throw new Exception("No transfer request");
             }
 
             
@@ -294,6 +295,12 @@ namespace Inivohacks.BL.BLServices
             });
 
             return StaticVariables.SuccessMessage;
+        }
+
+        public async Task<List<Scan>> getHistory(Guid scanGuid)
+        {
+            var history = await _iScanRepository.Search(e => e.ScanGuid == scanGuid).ToListAsync();
+            return history;
         }
     }
 }
