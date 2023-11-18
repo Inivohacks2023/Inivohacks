@@ -25,6 +25,7 @@ export class UserMenuComponent {
   }
 
   logOut() {
+    localStorage.removeItem('token');
     this.router.navigate(['']);
     this.sharedDetailsService.setCustomerStatus(false);
     this.isCustomer = false;
