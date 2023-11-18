@@ -5,87 +5,89 @@
   <div class="col-span-6 z-10 text-center details">
     <h1 class="mb-8">Comprehensive Medicine Overview</h1>
     <div class="w-full h-full flex justify-center">
-      <div class="rounded-[10px] h-[71%] w-5/6  shadow-login text-center grid-rows-9 px-20 py-16">
-        <div class="grid grid-cols-2 mb-5">
-          <div class="flex items-center pl-10">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
-              Product Name :
-            </label>
+      <nb-card class="rounded-[10px] h-min w-5/6  shadow-login text-center grid-rows-9 px-20 py-16">
+        <nb-card-body class="overflow-y-hidden">
+          <div class="grid grid-cols-2 mb-5">
+            <div class="flex items-center pl-10">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                Product Name :
+              </label>
+            </div>
+            <div class="">
+              <input [disabled]="true" [(ngModel)]="name" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="XXXXX">
+            </div>
           </div>
-          <div class="">
-            <input [disabled]="true" [(ngModel)]="name" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="XXXXX">
+          <div class="grid grid-cols-2 mb-5">
+            <div class="flex items-center pl-10">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                Dosage :
+              </label>
+            </div>
+            <div class="">
+              <input [(ngModel)]="dosage" [disabled]="true" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="XXXXX">
+            </div>
           </div>
-        </div>
-        <div class="grid grid-cols-2 mb-5">
-          <div class="flex items-center pl-10">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
-              Dosage :
-            </label>
+          <div class="grid grid-cols-2 mb-5">
+            <div class="flex items-center pl-10">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                Manufacturer Name :
+              </label>
+            </div>
+            <div class="">
+              <input [(ngModel)]="manufacturerName" [disabled]="true" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Liquid/Tablet/Capsules">
+            </div>
           </div>
-          <div class="">
-            <input [(ngModel)]="dosage" [disabled]="true" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="XXXXX">
+          <div class="grid grid-cols-2 mb-5">
+            <div class="flex items-center pl-10">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                Manufacturer Address :
+              </label>
+            </div>
+            <div class="">
+              <input [(ngModel)]="manufacturerAddress" [disabled]="true" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Medicine Name">
+            </div>
           </div>
-        </div>
-        <div class="grid grid-cols-2 mb-5">
-          <div class="flex items-center pl-10">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
-              Manufacturer Name :
-            </label>
+          <div class="grid grid-cols-2 mb-5">
+            <div class="flex items-center pl-10">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                manufactured Date :
+              </label>
+            </div>
+            <div class="">
+              <input [(ngModel)]="manufacturedDate" [disabled]="true" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Manufacturer">
+            </div>
           </div>
-          <div class="">
-            <input [(ngModel)]="manufacturerName" [disabled]="true" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Liquid/Tablet/Capsules">
+          <div class="grid grid-cols-2 mb-5">
+            <div class="flex items-center pl-10">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                Status :
+              </label>
+            </div>
+            <div class="">
+              <input [(ngModel)]="recallStatus" [disabled]="true" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Supplier">
+            </div>
           </div>
-        </div>
-        <div class="grid grid-cols-2 mb-5">
-          <div class="flex items-center pl-10">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
-              Manufacturer Address :
-            </label>
+          <div class="grid grid-cols-2 mb-16">
+            <div class="flex items-center pl-10">
+              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                Last Available Location :
+              </label>
+            </div>
+            <div class="">
+              <input [(ngModel)]="lastAvailablelocation" [disabled]="true" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Pharmacy">
+            </div>
           </div>
-          <div class="">
-            <input [(ngModel)]="manufacturerAddress" [disabled]="true" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Medicine Name">
-          </div>
-        </div>
-        <div class="grid grid-cols-2 mb-5">
-          <div class="flex items-center pl-10">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
-              manufactured Date :
-            </label>
-          </div>
-          <div class="">
-            <input [(ngModel)]="manufacturedDate" [disabled]="true" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Manufacturer">
-          </div>
-        </div>
-        <div class="grid grid-cols-2 mb-5">
-          <div class="flex items-center pl-10">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
-              Status :
-            </label>
-          </div>
-          <div class="">
-            <input [(ngModel)]="recallStatus" [disabled]="true" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Supplier">
-          </div>
-        </div>
-        <div class="grid grid-cols-2 mb-16">
-          <div class="flex items-center pl-10">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
-              Last Available Location :
-            </label>
-          </div>
-          <div class="">
-            <input [(ngModel)]="lastAvailablelocation" [disabled]="true" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Pharmacy">
-          </div>
-        </div>
 
-        <div class="grid grid-cols-2 mt-8">
-          <div class="flex justify-center">
-            <button nbButton hero status="primary" (click)="backToScan()">Scan New</button>
+          <div class="grid grid-cols-2 mt-8">
+            <div class="flex justify-center">
+              <button nbButton hero status="primary" (click)="backToScan()">Scan New</button>
+            </div>
+            <div class="flex justify-center">
+              <button nbButton hero status="success" (click)="saveAsImage()">Save as Image</button>
+            </div>
           </div>
-          <div class="flex justify-start">
-            <button nbButton hero status="success" (click)="saveAsImage()">Save as Image</button>
-          </div>
-        </div>
-      </div>
+        </nb-card-body>
+      </nb-card>
     </div>
   </div>
   <div class="col-span-3 flex items-center">

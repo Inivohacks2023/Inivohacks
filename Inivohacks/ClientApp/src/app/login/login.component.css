@@ -1,16 +1,9 @@
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-
-
 
 h1 {
   font-weight: bold;
   font-size: 24px;
   margin: 0;
-}
-
-h2 {
-  text-align: center;
 }
 
 p {
@@ -21,9 +14,6 @@ p {
   margin: 20px 0 30px;
 }
 
-span {
-  font-size: 12px;
-}
 
 a {
   color: #fff;
@@ -33,6 +23,10 @@ a {
   position: absolute;
   bottom: 10px;
 }
+
+  a:hover {
+    color: #0603a8;
+  }
 
 button {
   border-radius: 10px;

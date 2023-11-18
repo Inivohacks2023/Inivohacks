@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SharedDetailsService } from '../services/shared-details.service';
-import html2canvas from 'html2canvas';
+import { SharedDetailsService } from '../services/shared-details.service'
 import domtoimage from 'dom-to-image';
 
 @Component({
@@ -49,7 +48,6 @@ export class QrDetailsComponent {
           transformOrigin: 'top left',
         },
       }).then((dataUrl) => {
-        // Create a link element to download the image
         const link = document.createElement('a');
         link.href = dataUrl;
         link.download = 'qr_details.png';
