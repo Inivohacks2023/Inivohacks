@@ -57,7 +57,7 @@ namespace Inivohacks.Controllers
 
 
             foreach (int id in cert.PermissionList) {
-                claims.Append(new Claim(id.ToString(), "true"));
+                claims = claims.Append(new Claim(id.ToString(), "true")).ToArray();
             }
             
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
