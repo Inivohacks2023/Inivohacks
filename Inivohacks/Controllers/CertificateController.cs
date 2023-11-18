@@ -88,6 +88,22 @@ namespace Inivohacks.Controllers
         }
 
 
+        [HttpGet("IsValid/{token}")]
+        public async Task<ActionResult<CertificateModel>> IsValidToken(string token)
+        {
+            var c = await _certService.GetCertificateByTokenAsync(token);
+            if (c == null)
+            {
+                return NotFound();
+            }
+            if (c.InUse)
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
+
+
         [HttpGet("ByProductId/{productId}")]
         public async Task<ActionResult<CertificateModel>> GetAllCertificatesForProduct(int productId)
         {
