@@ -1,8 +1,11 @@
 ﻿using Inivohacks.BL.DTOs;
 using Inivohacks.DAL.Models;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,8 +22,8 @@ namespace Inivohacks.BL.Helper
             {
                 ProductID = certificate.ProductID,
                 InUse = certificate.InUse,
-                ExpiryDate = certificate.ExpiryDate
-                
+                ExpiryDate = certificate.ExpiryDate,
+                Token = certificate.Token,
             };
 
             return item;
@@ -33,8 +36,10 @@ namespace Inivohacks.BL.Helper
 
             var item = new Certificate()
             {
-               
-
+                ExpiryDate = certificate.ExpiryDate,
+                InUse = true,
+                Token = certificate.Token,
+                ProductID = certificate.ProductID
             };
 
             return item;

@@ -3,6 +3,7 @@ using Inivohacks.BL.DTOs;
 using Inivohacks.BL.Helper;
 using Inivohacks.DAL.Models;
 using Inivohacks.DAL.Repositories;
+using Microsoft.Extensions.Configuration;
 
 namespace Inivohacks.BL.BLServices
 {
@@ -10,36 +11,39 @@ namespace Inivohacks.BL.BLServices
     {
         private readonly ICertificateRepository _certifiRepository;
         private readonly ICertPermission _certService;
+        private readonly IConfiguration _configuration;
 
-        public CertificateService(ICertificateRepository certificationRepository, ICertPermission certService)
+        public CertificateService(ICertificateRepository certificationRepository, ICertPermission certService, IConfiguration configuration)
         {
             _certifiRepository = certificationRepository;
             _certService = certService;
+            _configuration = configuration;
         }
 
-        public async Task<bool> CreateCertificateAsync(CertificateDto dto)
+        public async Task<string> CreateCertificateAsync(CertificateDto dto)
         {
-            bool status = false;
             try
             {
-              int certId=await  _certifiRepository.AddCertPermissionAsync(dto.TransformAPItoDAL());
+              Certificate cert =await  _certifiRepository.AddCertPermissionAsync(dto.TransformAPItoDAL());
                 foreach (var permissionID in dto.PermissionList)
                 {
                     var item = new CertPermission()
                     {
 
-                        CertificateID = certId,
+                        CertificateID = cert.CertificateID,
                         PermissionID = Convert.ToInt32(permissionID)
                     };
                     await _certService.AddAsync(item);
                 }
-                status= true;
+
+                //var cert= await GetCertificateByIdAsync(certId);
+                return cert.Token;
             }
             catch (Exception ex)
             {
-                status = false;
             }
-            return status;
+
+            return string.Empty; 
         }
 
         public IAsyncEnumerable<CertificateDto> GetAllCertificatesAsync()
