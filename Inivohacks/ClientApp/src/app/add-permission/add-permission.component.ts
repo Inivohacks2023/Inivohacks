@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NbDateService } from '@nebular/theme';
+import { ApiServiceService } from '../services/api-service.service';
 
 @Component({
   selector: 'app-add-permission',
@@ -23,9 +24,11 @@ export class AddPermissionComponent {
   dosage: string = '';
   selectedPermissions: string[] = [];
   permissions = ['View Only', 'Rebrand', 'Update Recall', 'Transfer', 'Accept'];
-
-  constructor(private route: ActivatedRoute, private dateService: NbDateService<Date>) {
+  postData: number[] = [];
+  
+  constructor(private apiService: ApiServiceService, private route: ActivatedRoute, private dateService: NbDateService<Date>) {
     this.min = this.dateService.today();
+    
 }
 
 
@@ -58,11 +61,37 @@ export class AddPermissionComponent {
     return this.selectedPermissions.includes(permission);
   }
 
-  save() {
+  async save() {
     const selectedOptionsJson = {
       selectedPermissions: this.selectedPermissions,
     };
+    console.log(this.selectedPermissions)
 
+    for (var i in this.selectedPermissions) {
+      if (i.includes('View Only')) {
+        this.postData.push(1)
+      }
+      if (i.includes('Rebrand')) {
+        this.postData.push(2)
+      }
+      if (i.includes('Update Recall')) {
+        this.postData.push(3)
+      }
+      if (i.includes('Transfer')) {
+        this.postData.push(4)
+      }
+      if (i.includes('Accept')) {
+        this.postData.push(5)
+      }
+    }
+
+    var certificateData = {
+      "productID": 1,
+      "inUse": true,
+      "expiryDate": this.selectedDate,
+      "permissionList": this.postData,
+      "token": "string"
+    };
     const selectedDateJson = {
       selectedDate: this.selectedDate,
     };
@@ -73,6 +102,11 @@ export class AddPermissionComponent {
     };
 
     console.log('Combined JSON:', combinedJson);
+    try {
+     var token = this.apiService.certificatePost(certificateData);
+      console.log('certificateData', certificateData)
+      console.log('token', token)
+    } catch { }
   }
 
   onDateChange(event: any): void {
