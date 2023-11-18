@@ -19,7 +19,8 @@ import {
   NbTreeGridModule,
   NbDatepickerModule,
   NbSelectModule,
-  NbToggleModule
+  NbToggleModule,
+  NbRadioModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
@@ -90,7 +91,8 @@ import { RebrandComponent } from './rebrand/rebrand.component';
     NbTreeGridModule,
     NbDatepickerModule,
     NbSelectModule,
-    NbToggleModule
+    NbToggleModule,
+    NbRadioModule,
   ],
   providers: [ScanApiService],
   bootstrap: [AppComponent]
