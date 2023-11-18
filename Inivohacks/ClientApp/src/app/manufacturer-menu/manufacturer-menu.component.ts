@@ -15,6 +15,6 @@ export class ManufacturerMenuComponent {
   }
 
   navigateToReadProducts() {
-    this.router.navigate(['/manufacturer/home']);
+    this.router.navigate(['/product-details-update']);
   }
 }
