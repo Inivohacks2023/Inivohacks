@@ -1,0 +1,100 @@
+<div class="grid grid-cols-12 grid-rows-[110px_minmax(900px,_1fr)_100px] h-full w-full overflow-y-hidden bg-supplier-scan-bg bg-no-repeat overflow-x-hidden">
+  <app-header class="w-full col-span-12"></app-header>
+  <div class="col-span-1 z-10 flex items-center"></div>
+  <div class="col-span-10 z-10 text-center details">
+    <h1 class="mb-8">Medicine Overview</h1>
+    <div class="w-full h-full flex justify-center">
+      <nb-card class="rounded-[10px] h-min w-5/6  shadow-login text-center grid-rows-9 px-20 py-16">
+        <nb-card-body class=" flex flexoverflow-y-hidden">
+          <nb-card class="h-1000 rounded-[10px] w-1/2 text-center py-16">
+            <nb-card-body class="overflow-y-hidden">
+              <div class="grid grid-cols-2 mb-5">
+                <div class="flex items-center pl-10">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                    Track Id :
+                  </label>
+                </div>
+                <div class="">
+                  <input [(ngModel)]="trackId" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="XXXXX">
+                </div>
+              </div>
+              <div class="grid grid-cols-2 mb-5">
+                <div class="flex items-center pl-10">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                    Token :
+                  </label>
+                </div>
+                <div class="">
+                  <textarea [(ngModel)]="token" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Please paste your token here"></textarea>
+                </div>
+              </div>
+                <div class="flex justify-end mb-5">
+                  <button nbButton hero status="primary">View</button>
+                </div>
+              <div class="">
+                <textarea style="height: 200px;" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA]  text-[16px]" placeholder="Generated tracking code will appear here"></textarea>
+              </div>
+            </nb-card-body>
+          </nb-card>
+          <nb-card class="rounded-[10px] h-min w-1/2 text-center py-16">
+            <nb-card-body class="overflow-y-hidden">
+              <div class="grid grid-cols-2 mb-5">
+                <div class="flex items-center pl-10">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                    Product Name :
+                  </label>
+                </div>
+                <div class="">
+                  <input [(ngModel)]="productName" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="XXXXX">
+                </div>
+              </div>
+              <div class="grid grid-cols-2 mb-5">
+                <div class="flex items-center pl-10">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                    Recall Status :
+                  </label>
+                </div>
+                <div class="">
+                  <input [(ngModel)]="recallStatus" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="XXXXX">
+                </div>
+              </div>
+              <div class="grid grid-cols-2 mb-5">
+                <div class="flex items-center pl-10">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                    Status :
+                  </label>
+                </div>
+                <div class="">
+                  <input [(ngModel)]="status" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="XXXXX">
+                </div>
+              </div>
+              <div class="grid grid-cols-2 mb-5">
+                <div class="flex items-center pl-10">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-0" for="grid-first-name">
+                    Notes :
+                  </label>
+                </div>
+                <div class="">
+                  <textarea style="height: 200px;" [(ngModel)]="notes" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Please add the notes here"></textarea>
+                </div>
+              </div>
+            </nb-card-body>
+            <div class="grid grid-cols-3 mb-5">
+              <div class="flex pl-10">
+                <button nbButton hero status="success">Accept</button>
+              </div>
+              <div class="flex pl-8">
+                <button nbButton hero status="warning">Re-Brand</button>
+              </div>
+              <div class="flex pl-10">
+                <button nbButton hero status="danger">Transfer</button>
+              </div>
+            </div>
+
+          </nb-card>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+  <div class="col-span-1 z-10 flex items-center"></div>
+</div>

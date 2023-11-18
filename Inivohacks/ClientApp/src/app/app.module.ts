@@ -17,7 +17,8 @@ import {
   NbCardModule,
   NbTreeGridModule,
   NbDatepickerModule,
-  NbSelectModule
+  NbSelectModule,
+  NbToggleModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
@@ -31,6 +32,7 @@ import { QrDetailsComponent } from './qr-details/qr-details.component';
 import { ManufacturerHomeComponent } from './manufacturer-home/manufacturer-home.component';
 import { AddProductsComponent } from './add-products/add-products.component';
 import { AddPermissionComponent } from './add-permission/add-permission.component';
+import { ProductDetailsUpdateComponent } from './product-details-update/product-details-update.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { AddPermissionComponent } from './add-permission/add-permission.componen
     QrDetailsComponent,
     ManufacturerHomeComponent,
     AddProductsComponent,
-    AddPermissionComponent
+    AddPermissionComponent,
+    AddPermissionComponent,
+    ProductDetailsUpdateComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -52,6 +56,7 @@ import { AddPermissionComponent } from './add-permission/add-permission.componen
     RouterModule.forRoot([
       { path: '', component: LoginComponent , pathMatch: 'full' },
       { path: 'qr-scan', component: QrScanComponent },
+      { path: 'product-details-update', component: ProductDetailsUpdateComponent },
       { path: 'qr-details', component: QrDetailsComponent },
       { path: 'manufacturer/home', component: ManufacturerHomeComponent },
       { path: 'manufacturer/add-products', component: AddProductsComponent },
@@ -72,7 +77,8 @@ import { AddPermissionComponent } from './add-permission/add-permission.componen
     NbCardModule,
     NbTreeGridModule,
     NbDatepickerModule,
-    NbSelectModule
+    NbSelectModule,
+    NbToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

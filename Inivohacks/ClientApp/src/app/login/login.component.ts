@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedDetailsService } from '../services/shared-details.service';
-import { ApiServiceService } from '../services/api-service.service'
+import { ApiServiceService } from '../services/api-service.service';
+import { jwtDecode } from "jwt-decode";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,9 +11,12 @@ import { ApiServiceService } from '../services/api-service.service'
 })
 
 export class LoginComponent implements OnInit {
+  token: any;
   password='';
   username='';
   isValidUser = false;
+  isManufacturer = false;
+  isSupplier = false;
 
   constructor(private router: Router, private sharedDetailsService: SharedDetailsService, private apiService: ApiServiceService) { }
 
@@ -40,11 +45,16 @@ export class LoginComponent implements OnInit {
       .subscribe(response => {
         console.log('response: ', response);
         localStorage.setItem('token', response.token);
-        this.isValidUser = true;
+        this.token = localStorage.getItem('token');
+        localStorage.getItem('token') ? this.isValidUser = true : this.isValidUser = false;
+
       }, error => {
         localStorage.removeItem('token');
       })
     if (this.isValidUser) {
+
+      const decoded = jwtDecode(this.token);
+      console.log('decodedToken', decoded);
       //TODO: navigation to supllier or manufacturer
       this.router.navigate(['']);
     }
