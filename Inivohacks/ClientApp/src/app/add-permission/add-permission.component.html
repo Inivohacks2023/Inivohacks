@@ -1,0 +1,80 @@
+<div class="grid grid-cols-12 grid-rows-[110px_minmax(900px,_1fr)_100px] h-full w-full overflow-y-hidden bg-supplier-scan-bg bg-no-repeat overflow-x-hidden">
+  <app-header class="w-full col-span-12"></app-header>
+  <div class="col-span-3 z-10 flex items-center">
+  </div>
+  <div class="col-span-6 z-10 text-center details">
+    <h1 class="mb-8">Certificate Manager </h1>
+    <p class="mb-8 text-base">{{productName}} | {{dosage}} </p>
+    <div class="w-full h-full flex justify-center">
+      <nb-card class="rounded-[10px] h-min min-h-[500px] w-5/6  shadow-login text-center grid-rows-9 px-5 py-10">
+        <nb-card-body>
+          <div class="container">
+            <div class="dropdown">
+              <div class="select-btn" (click)="toggleDropdown()" [ngClass]="{'open': isDropdownOpen}">
+                <span class="btn-text">{{ selectedPermissions.length > 0 ? selectedPermissions.length + ' Selected' : 'Select Permission' }}</span>
+                <span class="arrow-dwn">
+                  <i class="fa-solid fa-chevron-down"></i>
+                </span>
+              </div>
+
+              <ul class="list-items">
+                <li class="item" *ngFor="let permission of permissions" (click)="toggleSelection(permission)" [ngClass]="{'checked': isSelected(permission)}">
+                  <span class="checkbox">
+                    <i class="fa-solid fa-check check-icon"></i>
+                  </span>
+                  <span class="item-text">{{ permission }}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="date-picker">
+              <input nbInput placeholder="Pick Date" [nbDatepicker]="picker" >
+              <nb-datepicker #picker [min]="min" (dateChange)="onDateChange($event)"></nb-datepicker>
+            </div>
+            <button nbButton hero status="primary" (click)="save()">Save</button>
+          </div>
+
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500 border border-[#E4E9F2] rounded-md text-center z-10">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+              <tr>
+                <th scope="col" class="px-6 py-3">
+                  Product Id
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Permission Level
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Expiery Date
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Certificate
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white border-b" *ngFor="let medicine of medicines">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                  {{ medicine.productId }}
+                </th>
+                <td class="px-6 py-4">
+                  {{ medicine.permissions }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ medicine.expDate }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ medicine.Certificate }}
+                  <a href="javascript:;" class=" m-4 font-medium text-blue-600 hover:underline" (click)="copyToClipboard(medicine.Certificate)">Copy to Clipboard</a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+  <div class="col-span-3 flex items-center">
+  </div>
+  <div class="z-0 w-full h-[70px] col-span-12 bg-white flex justify-between items-center px-[42px] border-2 border-b-[#F3F3F3] fixed bottom-0">
+  </div>
+</div>
