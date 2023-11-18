@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ScanApiService } from '../app/services/scan-api.service';
 import {
   NbThemeModule,
   NbLayoutModule,
@@ -17,7 +18,9 @@ import {
   NbCardModule,
   NbTreeGridModule,
   NbDatepickerModule,
-  NbSelectModule
+  NbSelectModule,
+  NbToggleModule,
+  NbRadioModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
@@ -34,6 +37,8 @@ import { AddPermissionComponent } from './add-permission/add-permission.componen
 import { HandoverProductsComponent } from './handover-products/handover-products.component';
 import { ManufacturerMenuComponent } from './manufacturer-menu/manufacturer-menu.component';
 import { AcceptProductsComponent } from './accept-products/accept-products.component';
+import { ProductDetailsUpdateComponent } from './product-details-update/product-details-update.component';
+import { RebrandComponent } from './rebrand/rebrand.component';
 
 @NgModule({
   declarations: [
@@ -45,10 +50,12 @@ import { AcceptProductsComponent } from './accept-products/accept-products.compo
     QrDetailsComponent,
     ManufacturerHomeComponent,
     AddProductsComponent,
+    ProductDetailsUpdateComponent,
     AddPermissionComponent,
     HandoverProductsComponent,
     ManufacturerMenuComponent,
-    AcceptProductsComponent
+    AcceptProductsComponent,
+    RebrandComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,6 +65,7 @@ import { AcceptProductsComponent } from './accept-products/accept-products.compo
     RouterModule.forRoot([
       { path: '', component: LoginComponent , pathMatch: 'full' },
       { path: 'qr-scan', component: QrScanComponent },
+      { path: 'product-details-update', component: ProductDetailsUpdateComponent },
       { path: 'qr-details', component: QrDetailsComponent },
       { path: 'manufacturer/home', component: ManufacturerHomeComponent },
       { path: 'manufacturer/add-products', component: AddProductsComponent },
@@ -65,6 +73,7 @@ import { AcceptProductsComponent } from './accept-products/accept-products.compo
       { path: 'manufacturer/handover-products', component: HandoverProductsComponent },
       { path: 'manufacturer', component: ManufacturerMenuComponent },
       { path: 'manufacturer/accept-products', component: AcceptProductsComponent },
+      { path: 'manufacturer/rebrand-products', component: RebrandComponent },
     ]),
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
@@ -81,9 +90,11 @@ import { AcceptProductsComponent } from './accept-products/accept-products.compo
     NbCardModule,
     NbTreeGridModule,
     NbDatepickerModule,
-    NbSelectModule
+    NbSelectModule,
+    NbToggleModule,
+    NbRadioModule,
   ],
-  providers: [],
+  providers: [ScanApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

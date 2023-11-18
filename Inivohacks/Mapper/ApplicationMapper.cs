@@ -24,6 +24,7 @@ namespace Inivohacks.Mapper
             CreateMap<PermissionModel, PermissionDto>();
             CreateMap<CertificateDto, CertificateModel>();
             CreateMap<CertificateModel, CertificateDto>();
+            CreateMap<Scan,ScanDto>();
         }
     }
 

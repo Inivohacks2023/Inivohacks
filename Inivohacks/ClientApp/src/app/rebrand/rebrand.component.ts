@@ -1,21 +1,28 @@
 import { Component } from '@angular/core';
+
 import { ScanApiService } from '../services/scan-api.service';
 
-@Component({
-  selector: 'app-accept-products',
-  templateUrl: './accept-products.component.html',
-  styleUrls: ['./accept-products.component.css']
-})
-export class AcceptProductsComponent {
+interface Product {
+  value: number,
+  display:string
+}
 
+@Component({
+  selector: 'app-rebrand',
+  templateUrl: './rebrand.component.html',
+  styleUrls: ['./rebrand.component.css']
+})
+export class RebrandComponent {
   trackingCode: string = '';
   latitude: string = '';
   longitude: string = '';
   locationName: string = '';
+  productList: Product[] = [];
+  selectedValue: number = 0;
 
   constructor(private scanApiService: ScanApiService) {
 
-
+    this.LoadData();
   }
 
   async accept() {
@@ -51,5 +58,29 @@ export class AcceptProductsComponent {
       }
     );
     ;
+  }
+
+  async LoadData() {
+
+    await this.scanApiService.getproducts().subscribe(
+      async (data: any) => {
+        debugger;
+        if (data != null) {
+          for (var i = 0; i < data.length; i++) {
+
+            this.productList.push({ value: data[i].productID, display:data[i].name })
+          }
+
+        }
+        else {
+          ;
+
+        }
+      },
+      (error: any) => {
+        debugger;
+        alert(error.error);
+      }
+    );
   }
 }

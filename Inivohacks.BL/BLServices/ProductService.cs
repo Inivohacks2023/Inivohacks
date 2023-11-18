@@ -2,6 +2,7 @@
 using Inivohacks.BL.Helper;
 using Inivohacks.DAL.Models;
 using Inivohacks.DAL.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -38,12 +39,23 @@ namespace Inivohacks.BL.BLServices
             return status;
         }
 
-        public async IAsyncEnumerable<ProductDto> GetAllProductsAsync()
+        public async IAsyncEnumerable<ProductDto> GetAllProductByManufactureID(int manufactureId)
         {
-            IAsyncEnumerable<Product> ProductList = productRepository.GetAllProductAsync();
+            IAsyncEnumerable<Product> ProductList = productRepository.GetAllProductByManufacturerIDAsync(manufactureId);
 
 
             await foreach (var prod in ProductList)
+            {
+                yield return prod.TransformDALtoAPI();
+            }
+        }
+
+        public async IAsyncEnumerable<ProductDto> GetAllProductsAsync()
+        {
+            var ProductList = await productRepository.Search(o => o.ProductID > 0).ToListAsync(); ;
+
+
+            foreach (var prod in ProductList)
             {
                 yield return prod.TransformDALtoAPI();
             }

@@ -73,5 +73,11 @@ namespace Inivohacks.BL.BLServices
                 yield return cert.TransformDALtoAPI();
             }
         }
+
+        public async Task<bool> RevokeCertificate(string token)
+        {
+            bool status = _certifiRepository.RevokeCertificate(token);
+            return status;
+        }
     }
 }

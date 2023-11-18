@@ -22,9 +22,12 @@ namespace Inivohacks.DAL.Repositories
            return cert;
         }
 
-        public IAsyncEnumerable<Certificate> GetAllCertificateAsync(int productID)
+        public async IAsyncEnumerable<Certificate> GetAllCertificateAsync(int productID)
         {
-            throw new NotImplementedException();
+            foreach (var cert in _dbContext.Certificates.Where(x => x.ProductID == productID).ToList())
+            {
+                yield return cert;
+            }
         }
 
         public async Task<Certificate> GetCertificateByTokenAsync(string token)
@@ -36,6 +39,24 @@ namespace Inivohacks.DAL.Repositories
             catch {
                 return null;
             }
+        }
+
+        public bool RevokeCertificate(string token)
+        {
+            try
+            {
+                Certificate cert = Search(a => string.Equals(a.Token, token)).FirstOrDefault();
+                if (cert != null)
+                {
+                    cert.InUse = false;
+                    UpdateAsync(cert);
+                    return true;
+                }
+
+                return false;
+            }
+            catch { return false; }
+
         }
     }
 }

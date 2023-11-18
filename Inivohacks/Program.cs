@@ -44,6 +44,11 @@ builder.Services.AddScoped<ITrackingCodeRepositoryForScan, TrackingCodeRepositor
 builder.Services.AddScoped<IScanRepository, ScanRepository>();
 builder.Services.AddScoped<ICertPermission, CertPermissionRepository>();
 
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+{
+    builder.WithOrigins("https://localhost:44434").AllowAnyMethod().AllowAnyHeader();
+}));
+
 builder.Services.AddDbContext<DatabaseContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -72,7 +77,7 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
+app.UseCors("corsapp");
 
 app.MapControllerRoute(
     name: "default",

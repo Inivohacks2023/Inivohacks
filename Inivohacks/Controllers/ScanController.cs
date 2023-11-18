@@ -1,4 +1,5 @@
 ﻿using Inivohacks.BL.BLServices;
+using Inivohacks.BL.DTOs;
 using Inivohacks.BL.DTOs.Models;
 using Inivohacks.DAL.Models;
 using Inivohacks.Mapper;
@@ -119,6 +120,14 @@ namespace Inivohacks.Controllers
                 return StatusCode(500, e.Message);
 
             }
+        }
+
+        [HttpGet]
+        [Route("GetHistory")]
+        public async Task<IActionResult> ShowHistory(Guid scanGuid)
+        {
+            var history = await _iscanService.getHistory(scanGuid);
+            return Ok(MapperExtentions.ToViewModel<List<Scan>,List<ScanDto>>(history));
         }
     }
 }

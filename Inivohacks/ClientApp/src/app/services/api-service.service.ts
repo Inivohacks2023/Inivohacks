@@ -19,4 +19,12 @@ export class ApiServiceService {
     return this.http.post<any>(url, data, { headers });
   }
 
+  certificatePost(data: any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const url = '/api/Certificate';
+    return this.http.post<any>(url, data, { headers });
+  }
+
 }

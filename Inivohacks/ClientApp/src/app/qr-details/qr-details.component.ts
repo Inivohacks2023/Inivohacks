@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedDetailsService } from '../services/shared-details.service'
 import domtoimage from 'dom-to-image';
+import { ScanApiService } from '../services/scan-api.service';
 
 @Component({
   selector: 'app-qr-details',
@@ -19,7 +20,10 @@ export class QrDetailsComponent {
   expDate: string = '';
   recallStatus: string = '';
   lastAvailablelocation: string = '';
-  constructor(private router: Router, private sharedDetailsService: SharedDetailsService,) { }
+  constructor(private router: Router, private sharedDetailsService: SharedDetailsService, private scanApiService: ScanApiService) {
+
+    this.getDetails();
+}
 
   ngOnInit(): void {
     this.qrDetails = this.sharedDetailsService.getQrDetails();
@@ -54,5 +58,37 @@ export class QrDetailsComponent {
         link.click();
       });
     }
+
+   
+  }
+
+  async getDetails() {
+    var x = localStorage.getItem("qrcode1234");
+    debugger;
+    await this.scanApiService.getDetails(x).subscribe(
+      async (data: any) => {
+        if (data != null) {
+
+          this.qrDetails = data.trackingCodeID;
+          this.dosage = data.dosage;
+          this.lastAvailablelocation = data.lastAvailablelocation;
+          this.expDate = data.expiryDate;
+          this.manufacturedDate = data.manufacturedDate;
+          this.manufacturerName = data.manufacturerName;
+          this.manufacturerAddress = data.manufacturerAddress;
+          this.recallStatus = data.recallStatus;
+          this.name = data.productName;
+         
+
+        }
+        else {
+          ;
+
+        }
+      },
+      (error: any) => {
+        debugger;
+      }
+    );
   }
 }

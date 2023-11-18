@@ -17,7 +17,7 @@ export class QrScanComponent {
 
   isCameraVisible = false;
   hasProcessedQr = false; 
-  qrDetails: any; 
+  qrDetails: string=""; 
   
   scanQR() {
     this.isCameraVisible = !this.isCameraVisible;
@@ -53,5 +53,12 @@ export class QrScanComponent {
   viewQRDetails() {
     this.router.navigate(['/qr-details']);
     this.sharedDetailsService.setQRStatus(false);
+  }
+
+  navigate() {
+    var s = this.qrDetails; 
+    localStorage.setItem("qrcode1234", s)
+    window.location.replace("/qr-details")
+   
   }
 }
