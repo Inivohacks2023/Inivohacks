@@ -19,8 +19,8 @@ module.exports = {
         'login': '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
       },
       backgroundImage: {
-        'login-bg': "url('./assets/images/bg-login.png')",
-        'supplier-scan-bg': "url('./assets/images/bg.png')",
+        'login-bg': "url('src/assets/images/bg-login.png')",
+        'supplier-scan-bg': "url('src/assets/images/bg.png')",
       }
 },
   },

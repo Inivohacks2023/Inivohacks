@@ -1,0 +1,72 @@
+<div class="grid grid-cols-12 grid-rows-[110px_minmax(900px,_1fr)_100px] h-full w-full overflow-y-hidden bg-supplier-scan-bg bg-no-repeat overflow-x-hidden">
+  <app-header class="w-full col-span-12"></app-header>
+  <div class="col-span-3 z-10 flex items-center">
+  </div>
+  <div class="col-span-6 z-10 text-center details">
+    <h1 class="mb-8">Product Details Overview</h1>
+    <div class="w-full h-full flex justify-center">
+        <nb-card class="rounded-[10px] h-min w-5/6  shadow-login text-center grid-rows-9 px-5 py-10">
+          <nb-card-body>
+            <div class="relative overflow-x-auto">
+              <div class="pb-4 bg-white flex justify-between">
+                <div class="relative mt-2">
+                  <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                  </div>
+                  <input type="search" [(ngModel)]="searchTerm" id="default-search" class="block w-3/3 bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md ps-10 px-4 py-2 focus:border-[#7FD3FA] text-[#6F7174] text-[16px]" placeholder="Search by Name" required>
+                </div>
+                <button nbButton status="info" class="mr-2 mt-2" (click)="navigateToAddProduct()"><nb-icon icon="plus"></nb-icon></button>
+              </div>
+              <table class="w-full text-sm text-left rtl:text-right text-gray-500 border border-[#E4E9F2] rounded-md text-center">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                  <tr>
+                    <th scope="col" class="px-6 py-3">
+                      Product Id
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      Product Name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      Dosage
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      Package Type
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="bg-white border-b" *ngFor="let medicine of filterMedicines()">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                      {{ medicine.productId }}
+                    </th>
+                    <td class="px-6 py-4">
+                      {{ medicine.productName }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ medicine.dosage }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ medicine.packageType }}
+                    </td>
+                    <td class="px-6 py-4">
+                      <a href="javascript:;" (click)="navigateToAddPermission(medicine.productName,medicine.dosage)" class="font-medium text-blue-600 hover:underline">Add Certificate</a>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </nb-card-body>
+        </nb-card>
+    </div>
+  </div>
+  <div class="col-span-3 flex items-center">
+  </div>
+  <div class="z-0 w-full h-[70px] col-span-12 bg-white flex justify-between items-center px-[42px] border-2 border-b-[#F3F3F3] fixed bottom-0">
+  </div>
+</div>

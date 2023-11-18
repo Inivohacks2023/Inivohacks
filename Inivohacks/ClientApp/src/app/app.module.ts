@@ -12,7 +12,12 @@ import {
   NbFormFieldModule,
   NbButtonModule,
   NbIconModule,
-  NbUserModule
+  NbUserModule,
+  NbTabsetModule,
+  NbCardModule,
+  NbTreeGridModule,
+  NbDatepickerModule,
+  NbSelectModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
@@ -23,6 +28,9 @@ import { QrScanComponent } from './qr-scan/qr-scan.component';
 import { UserMenuComponent } from './user-menu/user-menu.component';
 import { HeaderComponent } from './header/header.component';
 import { QrDetailsComponent } from './qr-details/qr-details.component';
+import { ManufacturerHomeComponent } from './manufacturer-home/manufacturer-home.component';
+import { AddProductsComponent } from './add-products/add-products.component';
+import { AddPermissionComponent } from './add-permission/add-permission.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +39,10 @@ import { QrDetailsComponent } from './qr-details/qr-details.component';
     QrScanComponent,
     UserMenuComponent,
     HeaderComponent,
-    QrDetailsComponent
+    QrDetailsComponent,
+    ManufacturerHomeComponent,
+    AddProductsComponent,
+    AddPermissionComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -42,9 +53,13 @@ import { QrDetailsComponent } from './qr-details/qr-details.component';
       { path: '', component: LoginComponent , pathMatch: 'full' },
       { path: 'qr-scan', component: QrScanComponent },
       { path: 'qr-details', component: QrDetailsComponent },
+      { path: 'manufacturer/home', component: ManufacturerHomeComponent },
+      { path: 'manufacturer/add-products', component: AddProductsComponent },
+      { path: 'manufacturer/add-permission', component: AddPermissionComponent },
     ]),
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
+    NbDatepickerModule.forRoot(),
     NbLayoutModule,
     NbEvaIconsModule,
     NbAccordionModule,
@@ -52,7 +67,12 @@ import { QrDetailsComponent } from './qr-details/qr-details.component';
     NbIconModule,
     NbInputModule,
     NbButtonModule,
-    NbUserModule
+    NbUserModule,
+    NbTabsetModule,
+    NbCardModule,
+    NbTreeGridModule,
+    NbDatepickerModule,
+    NbSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
