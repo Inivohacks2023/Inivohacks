@@ -59,13 +59,13 @@ export class LoginComponent implements OnInit {
       this.isManufacturer = this.decodedModel.isManufacturer;
       this.isSupplier = this.decodedModel.isSupplier;
 
-      if (this.isSupplier) {
-        this.router.navigate(['/product-details-update']);
+      if (this.username == 'manufacturer') {
+        this.router.navigate(['/manufacturer']);
       }
       
-      if (this.isManufacturer) {
-        console.log('isManufacturer',this.isManufacturer);
-        this.router.navigate(['/manufacturer']);
+      if (this.username == 'supplier') {
+        this.router.navigate(['/product-details-update']);
+
       }
     }
   }
