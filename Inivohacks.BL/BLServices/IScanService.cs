@@ -1,4 +1,5 @@
-﻿using Inivohacks.BL.DTOs.Models;
+﻿using Inivohacks.BL.DTOs;
+using Inivohacks.BL.DTOs.Models;
 using Inivohacks.DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,6 @@ namespace Inivohacks.BL.BLServices
         public Task<string> Recall(RecallDTO model);
         public Task<string> RequestTransfer(TransferBatchDTO transferBatchDTO);
         public Task<string> AcceptTransfer(TransferBatchDTO transferBatchDTO);
+        public Task<List<Scan>> getHistory(Guid scanGuid);
     }
 }
