@@ -88,7 +88,7 @@ export class AddPermissionComponent {
     var certificateData = {
       "productID": 1,
       "inUse": true,
-      "expiryDate": this.selectedDate,
+      "expiryDate": "2023-11-12T09:18:23.421Z",
       "permissionList": this.postData,
       "token": "string"
     };
@@ -102,11 +102,9 @@ export class AddPermissionComponent {
     };
 
     console.log('Combined JSON:', combinedJson);
-    try {
      var token = this.apiService.certificatePost(certificateData);
       console.log('certificateData', certificateData)
       console.log('token', token)
-    } catch { }
   }
 
   onDateChange(event: any): void {
