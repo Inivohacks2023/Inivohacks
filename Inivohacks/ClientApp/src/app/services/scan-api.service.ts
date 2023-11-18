@@ -23,4 +23,18 @@ export class ScanApiService {
     const url = this.baseUrl+'/api/Scan/RequestTransfer';
     return this.httpClient.post<any>(url, data, { headers });
   }
+
+  acceptTransfer(data: any) {
+
+
+    const headers = new HttpHeaders({
+      'responseType': 'text',
+    });
+    const url = this.baseUrl + '/api/Scan/AcceptTransfer';
+    return this.httpClient.post<any>(url, data, { headers });
+  }
+
+
 }
+
+
