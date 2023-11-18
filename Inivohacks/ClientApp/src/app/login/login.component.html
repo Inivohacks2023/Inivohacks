@@ -29,7 +29,7 @@
                   </div>
                   <input [(ngModel)]="password" name="password" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full pl-10 py-2 focus:border-[#7FD3FA]" placeholder="Password">
                 </div>
-                <button [disabled] ="!username || !password" nbButton hero fullWidth status="primary">
+                <button (click) = "loginAsSupplierManufacturer()" [disabled] ="!username || !password" nbButton hero fullWidth status="primary">
                   Login
                 </button>
               </form>
@@ -55,7 +55,7 @@
                   </div>
                   <input [(ngModel)]="password" name="password" type="text" class="bg-[#F7F9FC] border border-[#E4E9F2] outline-none text-gray-900 text-sm rounded-md w-full pl-10 py-2 focus:border-[#7FD3FA]" placeholder="Password">
                 </div>
-                <button [disabled] ="!username || !password" nbButton hero fullWidth status="primary">
+                <button (click) = "loginAsSupplierManufacturer()" [disabled] ="!username || !password" nbButton hero fullWidth status="primary">
                   Login
                 </button>
               </form>
