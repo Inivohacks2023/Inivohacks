@@ -1,4 +1,6 @@
-﻿namespace Inivohacks.ViewModels
+﻿using AutoMapper.Configuration.Annotations;
+
+namespace Inivohacks.ViewModels
 {
     public class CertificateModel
     {
@@ -6,7 +8,8 @@
         public int ProductID { get; set; }
         public bool InUse { get; set; }
         public DateTime ExpiryDate { get; set; }
-        public ICollection<CertificatePermissionModel> certificatePermissions{ get; set; }
+        public List<int> PermissionList{ get; set; }
+        [Ignore]
         public string Token { get; set; }
     }
 }
