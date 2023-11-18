@@ -43,7 +43,7 @@ namespace Inivohacks.Controllers
             await _certService.CreateCertificateAsync(
                 MapperExtentions.ToDto<CertificateModel, CertificateDto>(viewModel));
 
-            return Ok();
+            return Ok(token);
         }
 
         private string GenerateJwtToken(CertificateModel cert)
