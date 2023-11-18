@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Inivohacks.DAL.Repositories
 {
-    public interface ICertificateRepository :IRepository<Certificate>
+    public interface ICertPermission :IRepository<CertPermission>
     {
-        Task<int> AddCertPermissionAsync(Certificate certificate);
     }
 }

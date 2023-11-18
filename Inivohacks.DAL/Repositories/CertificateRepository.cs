@@ -8,12 +8,20 @@ using System.Threading.Tasks;
 
 namespace Inivohacks.DAL.Repositories
 {
-    public class CertificateRepository: RepositoryBase<Permission>, ICertificateRepository
+    public class CertificateRepository: RepositoryBase<Certificate>, ICertificateRepository
     {
         private readonly DatabaseContext _dbContext;
         public CertificateRepository(DatabaseContext dbContext) : base(dbContext)
         {
             this._dbContext = dbContext;
         }
+        public async Task<int> AddCertPermissionAsync(Certificate certificate)
+        {
+            await AddAsync(certificate);
+           var cerID= _dbContext.Certificates.OrderByDescending(x => x.CertificateID).Select(y => y.CertificateID);
+            return Convert.ToInt32(cerID);
+        }
+
+
     }
 }
