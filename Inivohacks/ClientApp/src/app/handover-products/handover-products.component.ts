@@ -13,6 +13,17 @@ export class HandoverProductsComponent {
   locationName: string = '';
 
   transfer() {
+    
+    var obj = {
+      "trackingCode": this.trackingCode,
+      "certificateId": 0,
+      "latitude": this.latitude,
+      "longitude": this.longitude,
+      "locationName": this.locationName,
+      "userId": 0
+    };
+
+    debugger;
 
   }
 }
