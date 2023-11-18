@@ -27,7 +27,7 @@
               </ul>
             </div>
             <div class="date-picker">
-              <input nbInput placeholder="Pick Date" [nbDatepicker]="picker" >
+              <input nbInput placeholder="Expiry Date" [nbDatepicker]="picker" >
               <nb-datepicker #picker [min]="min" (dateChange)="onDateChange($event)"></nb-datepicker>
             </div>
             <button nbButton hero status="primary" (click)="save()">Save</button>

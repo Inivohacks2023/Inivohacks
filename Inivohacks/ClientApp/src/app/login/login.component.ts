@@ -62,9 +62,9 @@ export class LoginComponent implements OnInit {
       if (this.isSupplier) {
         this.router.navigate(['/product-details-update']);
       }
-      //TODO: navigation to supllier or manufacturer
       
       if (this.isManufacturer) {
+        console.log('isManufacturer',this.isManufacturer);
         this.router.navigate(['/manufacturer']);
       }
     }
